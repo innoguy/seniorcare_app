@@ -1,0 +1,286 @@
+﻿<?xml version="1.0" encoding="utf-8" ?>
+<Application xmlns="http://xamarin.com/schemas/2014/forms"
+             xmlns:x="http://schemas.microsoft.com/winfx/2009/xaml"
+             xmlns:converters="clr-namespace:SeniorCare.Converters;assembly=SeniorCare"
+             xmlns:controls="clr-namespace:XF.Infrastructure.Core.Controls;assembly=XF.Infrastructure.Core"
+             xmlns:resources="clr-namespace:SeniorCare.Resources;assembly=SeniorCare"
+             x:Class="SeniorCare.App">
+    <Application.Resources>
+        <!--Colors-->
+        <Color x:Key="NikoWhiteColor">#FFFFFF</Color>
+        <Color x:Key="NikoSoftGreyColor">#E5E5E5</Color>
+        <Color x:Key="NikoMildGreyColor">#999999</Color>
+        <Color x:Key="NikoGreyColor">#7F7F7F</Color>
+        <Color x:Key="NikoHardGreyColor">#4C4C4C</Color>
+        <Color x:Key="NikoBackgroundGreyColor">#F6F6F6</Color>
+
+        <Color x:Key="NikoBlackColor">#1A1A1A</Color>
+        <Color x:Key="NikoYellowColor">#FFC73C</Color>
+        <Color x:Key="NikoRedColor">#FD222C</Color>
+
+        <!--Page Layout-->
+        <Style TargetType="{x:Type ContentPage}" ApplyToDerivedTypes="True">
+            <Setter Property="Padding">
+                <Setter.Value>
+                    <OnPlatform x:TypeArguments="Thickness">
+                        <On Platform="iOS" Value="0,20,0,0" />
+                    </OnPlatform>
+                </Setter.Value>
+            </Setter>
+            <Setter Property="BackgroundColor" Value="{StaticResource NikoBlackColor}" />
+        </Style>
+
+        <Style TargetType="{x:Type Grid}" ApplyToDerivedTypes="True">
+            <Setter Property="Margin" Value="0"/>
+            <Setter Property="Padding" Value="0"/>
+            <Setter Property="RowSpacing" Value="0"/>
+            <Setter Property="ColumnSpacing" Value="0"/>
+        </Style>
+
+        <Style x:Key="PageFooter" TargetType="{x:Type StackLayout}">
+            <Setter Property="Spacing" Value="0" />
+            <Setter Property="HeightRequest" Value="48" />
+            <Setter Property="BackgroundColor" Value="#CC000000"/>
+            <Setter Property="VerticalOptions" Value="End"/>
+            <Setter Property="Orientation" Value="Horizontal"/>
+            <Setter Property="Padding" Value="40,16,40,16"/>
+        </Style>
+
+        <Style x:Key="Layout" TargetType="{x:Type StackLayout}">
+            <Setter Property="Spacing" Value="0" />
+            <Setter Property="Margin" Value="40,0,40,0"/>
+            <Setter Property="BackgroundColor" Value="{x:StaticResource NikoWhiteColor}" />
+            <Setter Property="VerticalOptions" Value="Center" />
+            <Setter Property="HorizontalOptions" Value="FillAndExpand" />
+        </Style>
+
+        <Style x:Key="Layout24" TargetType="{x:Type StackLayout}">
+            <Setter Property="Spacing" Value="0" />
+            <Setter Property="Padding" Value="24,0,24,0"/>
+            <Setter Property="BackgroundColor" Value="Transparent" />
+            <Setter Property="VerticalOptions" Value="Center" />
+            <Setter Property="HorizontalOptions" Value="FillAndExpand" />
+        </Style>
+
+
+
+
+        <!--Label Style-->
+
+
+        <Style TargetType="{x:Type Label}" ApplyToDerivedTypes="True">
+            <Setter Property="FontSize" Value="12" />
+            <Setter Property="FontFamily">
+                <Setter.Value>
+                    <OnPlatform x:TypeArguments="x:String">
+                        <On Platform="iOS" Value="Roboto-Regular" />
+                        <On Platform="Android" Value="Roboto-Regular.ttf#Roboto-Regular" />
+                    </OnPlatform>
+                </Setter.Value>
+            </Setter>
+            <Setter Property="TextColor" Value="Black" />
+        </Style>
+
+        <Style x:Key="NikoLabel" TargetType="{x:Type Label}" ApplyToDerivedTypes="True">
+            <Setter Property="LineHeight" Value="1.333" />
+        </Style>
+
+        <Style x:Key="NikoBoldLabel" TargetType="{x:Type Label}" BasedOn="{x:StaticResource NikoLabel}" ApplyToDerivedTypes="True">
+            <Setter Property="FontFamily">
+                <Setter.Value>
+                    <OnPlatform x:TypeArguments="x:String">
+                        <On Platform="iOS" Value="roboto-Reboldgular" />
+                        <On Platform="Android" Value="roboto-bold.ttf#roboto-bold" />
+                    </OnPlatform>
+                </Setter.Value>
+            </Setter>
+        </Style>
+
+        <Style x:Key="SubTitleStyle" TargetType="{x:Type Label}" BasedOn="{x:StaticResource NikoLabel}">
+            <Setter Property="TextColor" Value="{x:StaticResource NikoGreyColor}" />
+        </Style>
+
+        <Style x:Key="NikoBlackLabel" TargetType="{x:Type Label}" BasedOn="{x:StaticResource NikoLabel}">
+            <Setter Property="TextColor" Value="{x:StaticResource NikoBlackColor}" />
+        </Style>
+
+        <Style x:Key="NikoBlackLabel14" TargetType="{x:Type Label}" BasedOn="{x:StaticResource NikoLabel}">
+            <Setter Property="TextColor" Value="{x:StaticResource NikoBlackColor}" />
+            <Setter Property="FontSize" Value="14" />
+        </Style>
+
+        <Style x:Key="NikoWhiteLabel14" TargetType="{x:Type Label}" BasedOn="{x:StaticResource NikoLabel}">
+            <Setter Property="TextColor" Value="{x:StaticResource NikoWhiteColor}" />
+            <Setter Property="FontSize" Value="14" />
+        </Style>
+
+        <Style x:Key="NikoBlackHeaderLabel" TargetType="{x:Type Label}" BasedOn="{x:StaticResource NikoBlackLabel}">
+            <Setter Property="FontSize" Value="14" />
+        </Style>
+
+        <Style x:Key="HyperLink" TargetType="{x:Type Label}">
+            <Setter Property="TextDecorations" Value="Underline" />
+        </Style>
+
+        <Style x:Key="NavBarTitle" TargetType="{x:Type controls:ExtLabel}" >
+            <Setter Property="VerticalOptions" Value="CenterAndExpand" />
+            <Setter Property="HorizontalOptions" Value="CenterAndExpand" />
+            <Setter Property="HorizontalTextAlignment" Value="Center"/>
+            <Setter Property="VerticalTextAlignment" Value="Center"/>
+            <Setter Property="FontFamily">
+                <Setter.Value>
+                    <OnPlatform x:TypeArguments="x:String">
+                        <On Platform="iOS" Value="Roboto-Regular" />
+                        <On Platform="Android" Value="Roboto-Regular.ttf#Roboto-Regular" />
+                    </OnPlatform>
+                </Setter.Value>
+            </Setter>
+            <Setter Property="FontSize" Value="14" />
+            <Setter Property="LineHeight" Value="1.333" />
+            <Setter Property="LetterSpacing" Value="0.3" />
+            <Setter Property="LineBreakMode" Value="WordWrap" />
+            <Setter Property="Margin" Value="12,0,12,0" />
+        </Style>
+
+        <Style x:Key="ConfigLabel" TargetType="{x:Type Label}" BasedOn="{x:StaticResource NikoBoldLabel}">
+            <Setter Property="FontSize" Value="16" />
+            <Setter Property="LineHeight" Value="1.5" />
+            <Setter Property="TextColor" Value="{x:StaticResource NikoWhiteColor}" />
+        </Style>
+
+
+        <!--Entry-->
+        <Style TargetType="{x:Type controls:ExtEntry}">
+            <Setter Property="TextColor"
+                        Value="{x:StaticResource NikoBlackColor}"></Setter>
+            <Setter Property="CornerRadius">
+                <Setter.Value>
+                    <OnPlatform x:TypeArguments="x:Int32">
+                        <On Platform="Android" Value="66" />
+                        <On Platform="iOS" Value="24" />
+                    </OnPlatform>
+                </Setter.Value>
+            </Setter>
+            <Setter Property="HorizontalOptions" Value="FillAndExpand" />
+            <Setter Property="VerticalOptions" Value="Center" />
+            <Setter Property="HeightRequest" Value="48" />
+            <Setter Property="BackgroundColor" Value="Transparent" />
+            <Setter Property="BackColor" Value="{StaticResource NikoSoftGreyColor}" />
+            <Setter Property="BorderColor" Value="{StaticResource NikoSoftGreyColor}" />
+            <Setter Property="BorderWidth" Value="1" />
+            <Setter Property="LeftPadding" Value="16" />
+            <Setter Property="RightPadding" Value="16" />
+            <Setter Property="FontFamily">
+                <Setter.Value>
+                    <OnPlatform x:TypeArguments="x:String">
+                        <On Platform="iOS" Value="Roboto-Regular" />
+                        <On Platform="Android" Value="Roboto-Regular.ttf#Roboto-Regular" />
+                    </OnPlatform>
+                </Setter.Value>
+            </Setter>
+            <Setter Property="FontSize" Value="14" />
+        </Style>
+
+        <!--Buttons-->
+
+        <Style TargetType="{x:Type Button}">
+            <Setter Property="FontFamily">
+                <Setter.Value>
+                    <OnPlatform x:TypeArguments="x:String">
+                        <On Platform="iOS" Value="Roboto-Regular" />
+                        <On Platform="Android" Value="Roboto-Regular.ttf#Roboto-Regular" />
+                    </OnPlatform>
+                </Setter.Value>
+            </Setter>
+            <Setter Property="FontSize" Value="14" />
+            <Setter Property="Margin" Value="0" />
+            <Setter Property="Padding" Value="24,0,24,0" />
+            <Setter Property="HorizontalOptions" Value="CenterAndExpand" />
+            <Setter Property="VerticalOptions" Value="Center" />
+            <Setter Property="BackgroundColor" Value="{x:StaticResource NikoYellowColor}" />
+            <Setter Property="TextColor" Value="{x:StaticResource NikoBlackColor}" />
+            <Setter Property="HeightRequest" Value="48" />
+            <Setter Property="BorderRadius">
+                <Setter.Value>
+                    <OnPlatform x:TypeArguments="x:Int32">
+                        <On Platform="Android" Value="66" />
+                        <On Platform="iOS" Value="24" />
+                    </OnPlatform>
+                </Setter.Value>
+            </Setter>
+        </Style>
+
+        <Style x:Key="NikoSmallButton" TargetType="{x:Type Button}" >
+            <Setter Property="WidthRequest" Value="124"/>
+        </Style>
+
+        <Style x:Key="LargeButton" TargetType="{x:Type Button}" >
+            <Setter Property="HorizontalOptions" Value="FillAndExpand"/>
+        </Style>
+
+        <Style x:Key="NikoSmallTransparentButton" TargetType="{x:Type Button}" BasedOn="{x:StaticResource NikoSmallButton}">
+            <Setter Property="TextColor" Value="{x:StaticResource NikoWhiteColor}"/>
+            <Setter Property="BackgroundColor" Value="Transparent"/>
+            <Setter Property="BorderWidth" Value="1" />
+            <Setter Property="BorderColor" Value="{x:StaticResource NikoMildGreyColor}" />
+        </Style>
+
+        <Style x:Key="LargeButtonTransparent" TargetType="{x:Type Button}" BasedOn="{x:StaticResource LargeButton}">
+            <Setter Property="BackgroundColor" Value="Transparent"/>
+            <Setter Property="BorderWidth" Value="1" />
+            <Setter Property="BorderColor" Value="{x:StaticResource NikoMildGreyColor}" />
+        </Style>
+
+        <Style x:Key="LargeButtonRed" TargetType="{x:Type Button}" BasedOn="{x:StaticResource LargeButton}">
+            <Setter Property="BackgroundColor" Value="{x:StaticResource NikoRedColor}"/>
+            <Setter Property="TextColor" Value="{x:StaticResource NikoWhiteColor}"/>
+        </Style>
+
+        <Style TargetType="{x:Type controls:ContentButton}" ApplyToDerivedTypes="True">
+            <Setter Property="Margin" Value="0" />
+            <Setter Property="Padding" Value="24,0,24,0" />
+            <Setter Property="HorizontalOptions" Value="FillAndExpand" />
+            <Setter Property="VerticalOptions" Value="Center" />
+            <Setter Property="BackgroundColor" Value="{x:StaticResource NikoYellowColor}" />
+            <Setter Property="HeightRequest" Value="48" />
+            <Setter Property="CornerRadius">
+                <Setter.Value>
+                    <OnPlatform x:TypeArguments="x:Single">
+                        <On Platform="Android" Value="66" />
+                        <On Platform="iOS" Value="24" />
+                    </OnPlatform>
+                </Setter.Value>
+            </Setter>
+        </Style>
+
+        <Style x:Key="ContentButtonTransparent" TargetType="{x:Type controls:ContentButton}">
+            <Setter Property="BorderColor" Value="{x:StaticResource NikoMildGreyColor}"/>
+            <Setter Property="BackgroundColor" Value="Transparent" />
+        </Style>
+        <!--TabItems-->
+
+        <Style x:Key="TabItemTitle" TargetType="{x:Type controls:ExtLabel}" ApplyToDerivedTypes="True">
+            <Setter Property="VerticalOptions" Value="CenterAndExpand" />
+            <Setter Property="HorizontalOptions" Value="CenterAndExpand" />
+            <Setter Property="HorizontalTextAlignment" Value="Center"/>
+            <Setter Property="VerticalTextAlignment" Value="Center"/>
+            <Setter Property="FontFamily">
+                <Setter.Value>
+                    <OnPlatform x:TypeArguments="x:String">
+                        <On Platform="iOS" Value="Roboto-Regular" />
+                        <On Platform="Android" Value="Roboto-Regular.ttf#Roboto-Regular" />
+                    </OnPlatform>
+                </Setter.Value>
+            </Setter>
+            <Setter Property="FontSize" Value="12" />
+            <Setter Property="LineHeight" Value="1.333" />
+            <Setter Property="LetterSpacing" Value="0.1" />
+            <Setter Property="Margin" Value="12" />
+            <Setter Property="TextColor" Value="{x:StaticResource NikoHardGreyColor}" />
+            <Setter Property="LineBreakMode" Value="TailTruncation" />
+        </Style>
+
+        <!--Converters-->
+        <converters:StringToUpperCaseConverter x:Key="UpperCaseConverter" />
+    </Application.Resources>
+</Application>

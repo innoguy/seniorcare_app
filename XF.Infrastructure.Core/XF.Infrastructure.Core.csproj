@@ -1,0 +1,28 @@
+﻿<Project Sdk="Microsoft.NET.Sdk">
+
+  <PropertyGroup>
+    <TargetFramework>netstandard2.0</TargetFramework>
+  </PropertyGroup>
+
+  <ItemGroup>
+    <PackageReference Include="Plugin.Permissions" Version="3.0.0.12" />
+    <PackageReference Include="Serilog.Sinks.RollingFile" Version="3.3.0" />
+    <PackageReference Include="Xamarin.Forms" Version="4.1.0.673156" />
+    <PackageReference Include="XForms.Plugin.AnimationNavigationPage" Version="1.0.7" />
+  </ItemGroup>
+
+  <ItemGroup>
+    <Compile Update="Controls\TabsControl\TabsControl.xaml.cs">
+      <DependentUpon>TabsControl.xaml</DependentUpon>
+    </Compile>
+  </ItemGroup>
+
+  <ItemGroup>
+    <EmbeddedResource Update="Controls\TabsControl\TabsControl.xaml">
+      <Generator>MSBuild:Compile</Generator>
+    </EmbeddedResource>
+  </ItemGroup>
+
+  
+
+</Project>

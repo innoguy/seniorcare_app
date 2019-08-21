@@ -1,0 +1,21 @@
+﻿<?xml version="1.0" encoding="UTF-8"?>
+<ContentView xmlns="http://xamarin.com/schemas/2014/forms" 
+             xmlns:x="http://schemas.microsoft.com/winfx/2009/xaml"
+             xmlns:controls="clr-namespace:XF.Infrastructure.Core.Controls;assembly=XF.Infrastructure.Core"
+             x:Class="XF.Infrastructure.Core.Controls.TabsControl"  >
+    <ContentView.Content>
+        <Grid RowSpacing="0" ColumnSpacing="0" Margin="0" Padding="0" x:Name="Root" >
+            <Grid.RowDefinitions >
+                <RowDefinition Height="Auto" />
+                <RowDefinition Height="*" />
+            </Grid.RowDefinitions>
+            <ScrollView x:Name="TabsScroll" Grid.Row="0" Orientation="Horizontal" 
+                        HorizontalOptions="FillAndExpand" VerticalOptions="FillAndExpand" 
+                        VerticalScrollBarVisibility="Never" 
+                        HorizontalScrollBarVisibility="Never">
+                <controls:RepeaterView x:Name="TabsRepeater" Orientation="Horizontal" HorizontalOptions="Start" VerticalOptions="Start" Margin="0" Padding="0" Spacing="0" />
+            </ScrollView>
+            <!--<controls:SwipeContainer Grid.Row="1" x:Name="TabContent" BackgroundColor="Yellow" />-->
+        </Grid>
+    </ContentView.Content>
+</ContentView>

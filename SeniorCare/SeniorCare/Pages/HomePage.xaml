@@ -1,0 +1,47 @@
+﻿<?xml version="1.0" encoding="utf-8" ?>
+<pages:PageBase xmlns="http://xamarin.com/schemas/2014/forms"
+             xmlns:x="http://schemas.microsoft.com/winfx/2009/xaml"
+             xmlns:baseClasses="clr-namespace:SeniorCare.BaseClasses;assembly=SeniorCare"
+             xmlns:pages="clr-namespace:SeniorCare.Pages;assembly=SeniorCare"
+             xmlns:controls="clr-namespace:XF.Infrastructure.Core.Controls;assembly=XF.Infrastructure.Core"
+             xmlns:views="clr-namespace:SeniorCare.Views;assembly=SeniorCare"
+
+             x:Class="SeniorCare.Pages.HomePage">
+    <ContentPage.Content>
+        <Grid>
+            <Grid.RowDefinitions>
+                <RowDefinition Height="Auto" />
+                <RowDefinition Height="*" />
+            </Grid.RowDefinitions>
+            <views:HeaderView Grid.Row="0" Title="{Binding Title, Converter={StaticResource UpperCaseConverter}}" BottomBorder="True" />
+            <controls:TabsControl  Grid.Row="1" BackgroundColor="{x:StaticResource NikoWhiteColor}"
+                                   CanChnageTabOnSwipe="True"
+                                   ItemsSource="{Binding TabItems}"
+                                   PageLocator="{Binding PageLocator}"
+                                   TabItemHasFixedSize="True">
+                <controls:TabsControl.HeaderItemTemplate>
+                    <DataTemplate>
+                        <Grid>
+                            <Grid.RowDefinitions>
+                                <RowDefinition Height="Auto" />
+                                <RowDefinition Height="4" />
+                            </Grid.RowDefinitions>
+                            <Label  Style="{StaticResource TabItemTitle}" Grid.Row="0" Text="{Binding Title, Converter={StaticResource UpperCaseConverter}}">
+                                <Label.Triggers>
+                                    <DataTrigger TargetType="{x:Type Label}" Binding="{Binding IsSelected}" Value="True">
+                                        <Setter Property="TextColor" Value="{x:StaticResource NikoBlackColor}" />
+                                    </DataTrigger>
+                                </Label.Triggers>
+                            </Label>
+
+                            <Grid Grid.Row="1">
+                                <BoxView BackgroundColor="{x:StaticResource NikoSoftGreyColor}" HeightRequest="1" VerticalOptions="End" />
+                                <BoxView BackgroundColor="{x:StaticResource NikoYellowColor}" IsVisible="{Binding IsSelected}" />
+                            </Grid>
+                        </Grid>
+                    </DataTemplate>
+                </controls:TabsControl.HeaderItemTemplate>
+            </controls:TabsControl>
+        </Grid>
+    </ContentPage.Content>
+</pages:PageBase>
