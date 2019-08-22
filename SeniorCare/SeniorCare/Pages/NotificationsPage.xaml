@@ -2,12 +2,49 @@
 <pages:PageBase xmlns="http://xamarin.com/schemas/2014/forms"
              xmlns:x="http://schemas.microsoft.com/winfx/2009/xaml"
              xmlns:pages="clr-namespace:SeniorCare.Pages;assembly=SeniorCare"
+             xmlns:controls="clr-namespace:XF.Infrastructure.Core.Controls;assembly=XF.Infrastructure.Core"
              x:Class="SeniorCare.Pages.NotificationsPage">
     <ContentPage.Content>
-        <StackLayout>
-            <Label Text="Welcome to Notifications Page!"
-                VerticalOptions="CenterAndExpand" 
-                HorizontalOptions="CenterAndExpand" />
-        </StackLayout>
+        <Grid BackgroundColor="{x:StaticResource NikoWhiteColor}">
+            <Grid.RowDefinitions>
+                <RowDefinition Height="*" />
+            </Grid.RowDefinitions>
+
+            <controls:ExtListView ItemsSource="{Binding Notifications}" 
+                                  SelectedItem="{Binding SelectedDevice}"
+                                  RefreshCommand="{Binding RefreshCommand}" 
+                                  IsRefreshing="{Binding IsRefreshing}"
+                                  x:Name="ListDevices" Margin="0,8"
+                                  Grid.Row="0" IsPullToRefreshEnabled="True"  SelectionMode="Single" HasUnevenRows="True" SeparatorVisibility="None">
+                <controls:ExtListView.ItemTemplate>
+                    <DataTemplate>
+                        <ViewCell>
+                            <StackLayout Style="{x:StaticResource Layout24}" BackgroundColor="Transparent">
+                                <Grid Padding="0,16,0,16">
+                                    <Grid.RowDefinitions>
+                                        <RowDefinition Height="Auto"/>
+                                        <RowDefinition Height="Auto"/>
+                                    </Grid.RowDefinitions>
+
+                                    <Label Margin="16,0" Grid.Row="0"
+                                           Style="{x:StaticResource NikoBlackLabel14}" 
+                                           Text="{Binding RuleId}" />
+                                    <Label Margin="16,0" Grid.Row="1"
+                                           Style="{x:StaticResource SubTitleStyle}"
+                                           Text="{Binding Message}">
+                                    </Label>
+                                </Grid>
+                                <BoxView HorizontalOptions="FillAndExpand" HeightRequest="0.5" BackgroundColor="{x:StaticResource NikoSoftGreyColor}" />
+                                <StackLayout.Triggers>
+                                    <DataTrigger TargetType="{x:Type StackLayout}" Binding="{Binding IsSelected}" Value="True">
+                                        <Setter Property="BackgroundColor" Value="{x:StaticResource NikoYellowColor}" />
+                                    </DataTrigger>
+                                </StackLayout.Triggers>
+                            </StackLayout>
+                        </ViewCell>
+                    </DataTemplate>
+                </controls:ExtListView.ItemTemplate>
+            </controls:ExtListView>
+        </Grid>
     </ContentPage.Content>
 </pages:PageBase>
