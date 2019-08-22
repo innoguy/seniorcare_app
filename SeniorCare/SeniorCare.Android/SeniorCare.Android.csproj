@@ -63,6 +63,7 @@
     <PackageReference Include="Xamarin.Android.Support.v7.MediaRouter" Version="28.0.0.1" />
   </ItemGroup>
   <ItemGroup>
+    <Compile Include="Bootstrap.cs" />
     <Compile Include="MainActivity.cs" />
     <Compile Include="Providers\AndroidStatusBarProvider.cs" />
     <Compile Include="Resources\Resource.designer.cs" />
@@ -102,6 +103,10 @@
     <Folder Include="Resources\drawable\" />
   </ItemGroup>
   <ItemGroup>
+    <ProjectReference Include="..\..\XF.Infrastructure.Core.Droid\XF.Infrastructure.Core.Droid.csproj">
+      <Project>{329EAD18-DE34-4995-9CD5-70B5057EAA50}</Project>
+      <Name>XF.Infrastructure.Core.Droid</Name>
+    </ProjectReference>
     <ProjectReference Include="..\..\XF.Infrastructure.Core\XF.Infrastructure.Core.csproj">
       <Project>{87B1B776-AE7E-496E-A4AD-BE06F2A84A07}</Project>
       <Name>XF.Infrastructure.Core</Name>

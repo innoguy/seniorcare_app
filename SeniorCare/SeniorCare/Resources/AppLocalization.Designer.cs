@@ -79,6 +79,33 @@ namespace SeniorCare.Resources {
         }
         
         /// <summary>
+        ///   Looks up a localized string similar to From.
+        /// </summary>
+        internal static string Term_From {
+            get {
+                return ResourceManager.GetString("Term_From", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   Looks up a localized string similar to To.
+        /// </summary>
+        internal static string Term_To {
+            get {
+                return ResourceManager.GetString("Term_To", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   Looks up a localized string similar to Television off.
+        /// </summary>
+        internal static string ThresholdsPage_Television {
+            get {
+                return ResourceManager.GetString("ThresholdsPage_Television", resourceCulture);
+            }
+        }
+        
+        /// <summary>
         ///   Looks up a localized string similar to Thresholds.
         /// </summary>
         internal static string ThresholdsPage_Title {

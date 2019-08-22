@@ -19,6 +19,7 @@ namespace SeniorCare.Droid
             ToolbarResource = Resource.Layout.Toolbar;
 
             base.OnCreate(savedInstanceState);
+            Bootstrap.Init();
             AndroidStatusBarProvider.Init(this);
             Plugin.CurrentActivity.CrossCurrentActivity.Current.Init(this, savedInstanceState);
             UserDialogs.Init(this);

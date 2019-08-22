@@ -56,10 +56,19 @@
 
         <Style x:Key="Layout24" TargetType="{x:Type StackLayout}">
             <Setter Property="Spacing" Value="0" />
-            <Setter Property="Padding" Value="24,0,24,0"/>
+            <Setter Property="Padding" Value="18,0,18,0"/>
             <Setter Property="BackgroundColor" Value="Transparent" />
             <Setter Property="VerticalOptions" Value="Center" />
             <Setter Property="HorizontalOptions" Value="FillAndExpand" />
+        </Style>
+
+        <Style x:Key="HorizontalLayout24" TargetType="{x:Type StackLayout}">
+            <Setter Property="Spacing" Value="0" />
+            <Setter Property="Padding" Value="18,0,18,0"/>
+            <Setter Property="BackgroundColor" Value="Transparent" />
+            <Setter Property="VerticalOptions" Value="Center" />
+            <Setter Property="HorizontalOptions" Value="FillAndExpand" />
+            <Setter Property="Orientation" Value="Horizontal" />
         </Style>
 
 
@@ -143,8 +152,9 @@
         </Style>
 
         <Style x:Key="ConfigLabel" TargetType="{x:Type Label}" BasedOn="{x:StaticResource NikoBoldLabel}">
-            <Setter Property="FontSize" Value="16" />
+            <Setter Property="FontSize" Value="14" />
             <Setter Property="LineHeight" Value="1.5" />
+            <Setter Property="Margin" Value="0,0,0,6" />
             <Setter Property="TextColor" Value="{x:StaticResource NikoWhiteColor}" />
         </Style>
 
