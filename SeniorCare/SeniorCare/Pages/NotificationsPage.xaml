@@ -26,9 +26,15 @@
                                         <RowDefinition Height="Auto"/>
                                     </Grid.RowDefinitions>
 
-                                    <Label Margin="16,0" Grid.Row="0"
-                                           Style="{x:StaticResource NikoBlackLabel14}" 
-                                           Text="{Binding RuleId}" />
+                                    <Label Margin="16,0" Grid.Row="0" Style="{x:StaticResource NikoBlackLabel14}" 
+                                           Text="{Binding Time}">
+                                        <Label.FormattedText>
+                                            <FormattedString>
+                                                <Span Text="Time: "/>
+                                                <Span Text="{Binding Time}"/>
+                                            </FormattedString>
+                                        </Label.FormattedText>
+                                    </Label>
                                     <Label Margin="16,0" Grid.Row="1"
                                            Style="{x:StaticResource SubTitleStyle}"
                                            Text="{Binding Message}">
