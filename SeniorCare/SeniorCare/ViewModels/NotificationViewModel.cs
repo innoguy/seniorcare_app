@@ -4,12 +4,12 @@ namespace SeniorCare.ViewModels
 {
     public class NotificationViewModel : ViewModelBase
     {
-        public string RuleId { get; }
+        public int RuleId { get; }
         public string Controllerid { get; }
         public string Time { get; }
         public string Message { get; }
 
-        public NotificationViewModel(string ruleId, string controllerId, string time, string message)
+        public NotificationViewModel(int ruleId, string controllerId, string time, string message)
         {
             RuleId = ruleId;
             Controllerid = controllerId;

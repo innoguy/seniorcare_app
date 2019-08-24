@@ -16,6 +16,7 @@
 
   <ItemGroup>
     <ProjectReference Include="..\..\Niko.IoC\Niko.IoC.csproj" />
+    <ProjectReference Include="..\..\ServiceModule\ServiceModule.csproj" />
     <ProjectReference Include="..\..\XF.Infrastructure.Core\XF.Infrastructure.Core.csproj" />
   </ItemGroup>
 

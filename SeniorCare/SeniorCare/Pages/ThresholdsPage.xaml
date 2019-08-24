@@ -32,12 +32,12 @@
                             <Label Text="{x:Static resources:AppLocalization.Term_From}" 
                                    Style="{x:StaticResource ConfigLabel}" 
                                    TextColor="{x:StaticResource NikoGreyColor}" />
-                            <TimePicker Time="{Binding TelevisiomFromTime}"></TimePicker>
+                            <TimePicker Time="{Binding TelevisionFromTime, Mode=TwoWay}"></TimePicker>
                         </StackLayout>
                         <StackLayout Grid.Row="1" Grid.Column="1"  Style="{x:StaticResource Layout24}">
                             <Label Text="{x:Static resources:AppLocalization.Term_To}" 
                                    Style="{x:StaticResource ConfigLabel}" TextColor="{x:StaticResource NikoGreyColor}" />
-                            <TimePicker Time="{Binding TelevisionUntilTime}"></TimePicker>
+                            <TimePicker Time="{Binding TelevisionToTime}"></TimePicker>
                         </StackLayout>
                     </Grid>
 
@@ -104,7 +104,7 @@
                             <Label Text="{x:Static resources:AppLocalization.Term_To}" 
                                    Style="{x:StaticResource ConfigLabel}" 
                                    TextColor="{x:StaticResource NikoGreyColor}"/>
-                            <TimePicker Time="{Binding BathroomUntilTime}"></TimePicker>
+                            <TimePicker Time="{Binding BathroomToTime}"></TimePicker>
                         </StackLayout>
                     </Grid>
 
@@ -129,12 +129,12 @@
                             <Label Text="{x:Static resources:AppLocalization.Term_From}" 
                                    Style="{x:StaticResource ConfigLabel}" 
                                    TextColor="{x:StaticResource NikoGreyColor}"/>
-                            <TimePicker Time="{Binding PersonNotInBetFrom}" Format="HH"></TimePicker>
+                            <TimePicker Time="{Binding PersonNotInBedFrom}" Format="HH"></TimePicker>
                         </StackLayout>
                         <StackLayout Grid.Row="1" Grid.Column="1"  Style="{x:StaticResource Layout24}">
                             <Label Text="{x:Static resources:AppLocalization.Term_To}" 
                                    Style="{x:StaticResource ConfigLabel}" TextColor="{x:StaticResource NikoGreyColor}" />
-                            <TimePicker Time="{Binding PersonNotInBetUntil}" Format="HH"></TimePicker>
+                            <TimePicker Time="{Binding PersonNotInBedTo}" Format="HH"></TimePicker>
                         </StackLayout>
                     </Grid>
                 </StackLayout>

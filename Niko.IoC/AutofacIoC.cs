@@ -5,7 +5,7 @@ namespace Niko.IoC
 {
     public static class AutofacIoC
     {
-        private static IContainer _container;
+        private static readonly IContainer _container;
 
         static AutofacIoC()
         {
@@ -17,7 +17,7 @@ namespace Niko.IoC
         private static void GenerateRootContainer(ContainerBuilder builder)
         {
             builder.RegisterModule(new XFCoreServicesModule());
-            //builder.RegisterModule(new AppServicesModule());
+            builder.RegisterModule(new ServicesModule());
         }
 
         public static T Resolve<T>()

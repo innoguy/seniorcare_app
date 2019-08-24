@@ -48,6 +48,7 @@
   </ItemGroup>
   <ItemGroup>
     <Compile Include="AutofacIoC.cs" />
+    <Compile Include="Modules\ServicesModule.cs" />
     <Compile Include="Modules\XFCoreServicesModule.cs" />
     <Compile Include="Properties\AssemblyInfo.cs" />
   </ItemGroup>
@@ -55,6 +56,10 @@
     <None Include="packages.config" />
   </ItemGroup>
   <ItemGroup>
+    <ProjectReference Include="..\ServiceModule\ServiceModule.csproj">
+      <Project>{952A2DF1-FF59-4283-B706-D8F5B896E196}</Project>
+      <Name>ServiceModule</Name>
+    </ProjectReference>
     <ProjectReference Include="..\XF.Infrastructure.Core\XF.Infrastructure.Core.csproj">
       <Project>{87b1b776-ae7e-496e-a4ad-be06f2a84a07}</Project>
       <Name>XF.Infrastructure.Core</Name>

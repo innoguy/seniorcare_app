@@ -1,13 +1,24 @@
-﻿using System.Collections.ObjectModel;
+﻿using System;
+using System.Collections.ObjectModel;
+using System.Threading;
+using System.Threading.Tasks;
 using System.Windows.Input;
+using Niko.IoC;
 using SeniorCare.BaseClasses;
 using SeniorCare.Resources;
+using ServiceModule.Notifications;
 using Xamarin.Forms;
 
 namespace SeniorCare.ViewModels
 {
     public class NotificationsViewModel : ViewModelBase
     {
+        private static string _startTime = "0";
+
+        private INotificationsDataservice _notificationsDataservice;
+        public INotificationsDataservice NotificationsDataservice =>
+            _notificationsDataservice ?? (_notificationsDataservice = AutofacIoC.Resolve<INotificationsDataservice>());
+
         private ObservableCollection<NotificationViewModel> _notifications;
         public ObservableCollection<NotificationViewModel> Notifications
         {
@@ -45,34 +56,39 @@ namespace SeniorCare.ViewModels
         public NotificationsViewModel()
         {
             Title = AppLocalization.NotificationsPage_Title;
+            RefreshCommand = new Command(() => { IsRefreshing = false; });
 
-            RefreshCommand = new Command(() =>
-            {
-                IsRefreshing = true;
-                LoadItems();
-                IsRefreshing = false;
-            });
-
-            Notifications = GetNotifications();
+            ThreadPool.QueueUserWorkItem(async o => await BackgroundAsync());
         }
 
-        private void LoadItems()
+        private async void GetNotifications()
         {
-            lock (syncRoot)
+            var endTime = ((Int64) DateTime.UtcNow.Subtract(new DateTime(1970, 1, 1)).TotalMilliseconds).ToString();
+
+            Notifications = new ObservableCollection<NotificationViewModel>();
+            var notificationEntities = await NotificationsDataservice.GetNotifications("device_id_1", _startTime, endTime);
+            _startTime = endTime;
+            var notificationViewModels = new ObservableCollection<NotificationViewModel>();
+            foreach (var notificationEntity in notificationEntities)
             {
-                Notifications = GetNotifications();
+                notificationViewModels.Add(new NotificationViewModel(
+                    notificationEntity.Ruleid,
+                    notificationEntity.Controllerid,
+                    notificationEntity.Time,
+                    notificationEntity.Message));
+            }
+
+            await Device.InvokeOnMainThreadAsync(() => { Notifications = notificationViewModels; });
+        }
+
+        private async Task BackgroundAsync()
+        {
+            while (true)
+            {
+                GetNotifications();
+                await Task.Delay(1000);
             }
         }
 
-        private ObservableCollection<NotificationViewModel> GetNotifications()
-        {
-            return new ObservableCollection<NotificationViewModel>
-            {
-                new NotificationViewModel("Device Id: 1", "5234523455", "124142152", "Lorem Ipsum is simply dummy text of the printing and typesetting industry. Lorem Ipsum has been the industry\'s standard dummy text ever since the 1500s"),
-                new NotificationViewModel("Device Id: 2", "5234523455", "124142152", "Lorem Ipsum is simply dummy text of the printing and typesetting industry. Lorem Ipsum has been the industry\'s standard dummy text ever since the 1500s, when an unknown printer took a galley of type and scrambled it to make a type specimen book. It has survived not only five centuries"),
-                new NotificationViewModel("Device Id: 3", "5234523455", "124142152", "Contrary to popular belief, Lorem Ipsum is not simply random text. It has roots in a piece of classical Latin literature from 45 BC, making it over 2000 years old"),
-                new NotificationViewModel("Device Id: 4", "5234523455", "124142152", "There are many variations of passages of Lorem Ipsum available, but the majority have suffered alteration in some form, by injected humour, or randomised words which don't look even slightly believable. If you are going to use a passage of Lorem Ipsum"),
-            };
-        }
     }
 }

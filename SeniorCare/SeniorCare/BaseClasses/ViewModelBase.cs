@@ -5,6 +5,7 @@ using System.Windows.Input;
 using Acr.UserDialogs;
 using Niko.IoC;
 using SeniorCare.Resources;
+using ServiceModule.Settings;
 using Xamarin.Forms;
 using XF.Infrastructure.Core;
 
@@ -14,6 +15,7 @@ namespace SeniorCare.BaseClasses
     {
         #region Properties
         protected readonly object syncRoot = new object();
+        protected bool isInitializing = false;
 
         private string _title;
         public string Title
@@ -99,6 +101,19 @@ namespace SeniorCare.BaseClasses
                     _navigationService = AutofacIoC.Resolve<INavigationService>();
                 }
                 return _navigationService;
+            }
+        }
+
+        private ISettingsService _settingsService;
+        public ISettingsService SettingsService
+        {
+            get
+            {
+                if (_settingsService == null)
+                {
+                    _settingsService = AutofacIoC.Resolve<ISettingsService>();
+                }
+                return _settingsService;
             }
         }
 
