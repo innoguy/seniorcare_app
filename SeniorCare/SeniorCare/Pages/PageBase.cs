@@ -1,5 +1,5 @@
 ﻿using FormsControls.Base;
-using Xamarin.Forms;
+using Xamarin.Forms.PlatformConfiguration.iOSSpecific;
 
 namespace SeniorCare.Pages
 {
@@ -7,7 +7,8 @@ namespace SeniorCare.Pages
     {
         public PageBase()
         {
-            NavigationPage.SetHasNavigationBar(this, false);
+            Xamarin.Forms.NavigationPage.SetHasNavigationBar(this, false);
+            On<Xamarin.Forms.PlatformConfiguration.iOS>().SetUseSafeArea(true);
         }
     }
 }
