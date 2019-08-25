@@ -77,6 +77,7 @@ namespace SeniorCare.ViewModels
 
         private async Task UpdateNotifications(IEnumerable<NotificationEntity> notificationEntities)
         {
+            AudioPlayer.PlayNotification();
             await Device.InvokeOnMainThreadAsync(() =>
             {
                 foreach (var notificationEntity in notificationEntities)
