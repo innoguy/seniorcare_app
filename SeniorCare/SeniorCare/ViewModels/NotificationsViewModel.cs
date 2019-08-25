@@ -1,5 +1,7 @@
 ﻿using System;
+using System.Collections.Generic;
 using System.Collections.ObjectModel;
+using System.Linq;
 using System.Threading;
 using System.Threading.Tasks;
 using System.Windows.Input;
@@ -7,6 +9,7 @@ using Niko.IoC;
 using SeniorCare.BaseClasses;
 using SeniorCare.Resources;
 using ServiceModule.Notifications;
+using ServiceModule.Notifications.Models;
 using Xamarin.Forms;
 
 namespace SeniorCare.ViewModels
@@ -57,35 +60,41 @@ namespace SeniorCare.ViewModels
         {
             Title = AppLocalization.NotificationsPage_Title;
             RefreshCommand = new Command(() => { IsRefreshing = false; });
-
+            Notifications = new ObservableCollection<NotificationViewModel>();
             ThreadPool.QueueUserWorkItem(async o => await BackgroundAsync());
         }
 
-        private async void GetNotifications()
+        private async Task GetNotifications()
         {
             var endTime = ((Int64) DateTime.UtcNow.Subtract(new DateTime(1970, 1, 1)).TotalMilliseconds).ToString();
 
-            Notifications = new ObservableCollection<NotificationViewModel>();
             var notificationEntities = await NotificationsDataservice.GetNotifications("device_id_1", _startTime, endTime);
             _startTime = endTime;
-            var notificationViewModels = new ObservableCollection<NotificationViewModel>();
-            foreach (var notificationEntity in notificationEntities)
-            {
-                notificationViewModels.Add(new NotificationViewModel(
-                    notificationEntity.Ruleid,
-                    notificationEntity.Controllerid,
-                    notificationEntity.Time,
-                    notificationEntity.Message));
-            }
+            if (!notificationEntities.Any()) return;
 
-            await Device.InvokeOnMainThreadAsync(() => { Notifications = notificationViewModels; });
+            await UpdateNotifications(notificationEntities);
+        }
+
+        private async Task UpdateNotifications(IEnumerable<NotificationEntity> notificationEntities)
+        {
+            await Device.InvokeOnMainThreadAsync(() =>
+            {
+                foreach (var notificationEntity in notificationEntities)
+                {
+                    Notifications.Insert(0, new NotificationViewModel(
+                        notificationEntity.Ruleid,
+                        notificationEntity.Controllerid,
+                        notificationEntity.Time,
+                        notificationEntity.Message));
+                }
+            });
         }
 
         private async Task BackgroundAsync()
         {
             while (true)
             {
-                GetNotifications();
+                await GetNotifications();
                 await Task.Delay(1000);
             }
         }
