@@ -417,6 +417,7 @@ namespace XF.Infrastructure.Core.Controls
             if (PageLocator == null) return;
             if (SelectedItem == null) return;
             if (HeaderItemTemplate == null) return;
+            SelectedItem.IsInitializing = true;
             var page = PageLocator.ResolveContentPage(SelectedItem);
             if (page == null) return;
             _swipeContainer.Content = page.Content;

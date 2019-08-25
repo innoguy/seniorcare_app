@@ -35,6 +35,8 @@ namespace XF.Infrastructure.Core.Controls
 
         #region IViewModel
         private string _title;
+        public bool IsInitializing { get; set; }
+
         public string Title
         {
             get { return _title; }

@@ -27,7 +27,6 @@ namespace SeniorCare.ViewModels
 
         public ThresholdsViewModel()
         {
-            isInitializing = true;
             Title = AppLocalization.ThresholdsPage_Title;
 
             _thresholds = new Thresholds
@@ -42,6 +41,11 @@ namespace SeniorCare.ViewModels
                 PersonNotInBedTo = TimeSpan.Parse(SettingsService.PersonNotInBedTo)
             };
 
+            InitializeData();
+        }
+
+        private void InitializeData()
+        {
             _televisionFromTime = TimeSpan.Parse(SettingsService.TelevisionFromTime);
             _televisionToTime = TimeSpan.Parse(SettingsService.TelevisionToTime);
             _powerDeviceTime = SettingsService.PowerDeviceTime;
@@ -50,8 +54,6 @@ namespace SeniorCare.ViewModels
             _bathroomToTime = TimeSpan.Parse(SettingsService.BathroomToTime);
             _personNotInBedFrom = TimeSpan.Parse(SettingsService.PersonNotInBedFrom);
             _personNotInBetTo = TimeSpan.Parse(SettingsService.PersonNotInBedTo);
-
-            ThreadPool.QueueUserWorkItem(async o => await BackgroundAsync());
         }
 
         public TimeSpan TelevisionFromTime
@@ -152,13 +154,13 @@ namespace SeniorCare.ViewModels
 
         private void UpdateThresholds()
         {
-            if (!isInitializing)
+            if (!IsInitializing)
                 ThresholdsDataservice.UpdateThresholds("device_id_1", _thresholds);
         }
 
         private async Task BackgroundAsync()
         {
-            while (isInitializing)
+            while (IsInitializing)
             {
                 IsBusy = true;
 
@@ -170,12 +172,18 @@ namespace SeniorCare.ViewModels
                     && _bathroomToTime == TimeSpan.Parse(SettingsService.BathroomToTime)
                     && _personNotInBedFrom == TimeSpan.Parse(SettingsService.PersonNotInBedFrom)
                     && _personNotInBetTo == TimeSpan.Parse(SettingsService.PersonNotInBedTo))
-
-                await Task.Delay(0);
-                isInitializing = false;
-                IsBusy = false;
-                break;
+                {
+                    await Task.Delay(0);
+                    IsInitializing = false;
+                    IsBusy = false;
+                    break;
+                }
             }
+        }
+
+        public override void OnAppearing()
+        { 
+            ThreadPool.QueueUserWorkItem(async o => await BackgroundAsync());
         }
 
     }

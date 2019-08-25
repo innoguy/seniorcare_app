@@ -15,9 +15,10 @@ namespace SeniorCare.BaseClasses
     {
         #region Properties
         protected readonly object syncRoot = new object();
-        protected bool isInitializing = false;
 
         private string _title;
+        public bool IsInitializing { get; set; }
+
         public string Title
         {
             get => _title;
