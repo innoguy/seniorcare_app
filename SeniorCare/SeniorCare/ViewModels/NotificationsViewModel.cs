@@ -1,6 +1,7 @@
 ﻿using System;
 using System.Collections.Generic;
 using System.Collections.ObjectModel;
+using System.Globalization;
 using System.Linq;
 using System.Threading;
 using System.Threading.Tasks;
@@ -85,11 +86,21 @@ namespace SeniorCare.ViewModels
                     Notifications.Insert(0, new NotificationViewModel(
                         notificationEntity.Ruleid,
                         notificationEntity.Controllerid,
-                        notificationEntity.Time,
+                        UnixTimeStampToDateTime(notificationEntity.Time),
                         notificationEntity.Message));
                 }
             });
         }
+
+        public string UnixTimeStampToDateTime(long unixTimeStamp)
+        {
+            DateTime dtDateTime = new DateTime(1970, 1, 1, 0, 0, 0, 0, DateTimeKind.Utc);
+            double time = unixTimeStamp;
+            dtDateTime = dtDateTime.AddMilliseconds(time).ToLocalTime();
+            string dateTime = dtDateTime.ToString("hh:mm:ss dd:mm:yyy");
+            return dateTime;
+        }
+
 
         private async Task BackgroundAsync()
         {

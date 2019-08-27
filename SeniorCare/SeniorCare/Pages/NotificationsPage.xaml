@@ -26,19 +26,15 @@
                                         <RowDefinition Height="Auto"/>
                                     </Grid.RowDefinitions>
 
-                                    <Label Margin="16,0" Grid.Row="0" Style="{x:StaticResource NikoBlackLabel14}" 
-                                           Text="{Binding Time}">
-                                        <Label.FormattedText>
-                                            <FormattedString>
-                                                <Span Text="Time: "/>
-                                                <Span Text="{Binding Time}"/>
-                                            </FormattedString>
-                                        </Label.FormattedText>
-                                    </Label>
-                                    <Label Margin="16,0" Grid.Row="1"
-                                           Style="{x:StaticResource SubTitleStyle}"
+                                    <Label Margin="16,2" Grid.Row="0"
+                                           Style="{x:StaticResource NikoBoldBlackLabel14}"
                                            Text="{Binding Message}">
                                     </Label>
+                                    <Label Margin="16,2" Grid.Row="1" 
+                                           Style="{x:StaticResource SubTitleStyle}" HorizontalTextAlignment="End"
+                                           Text="{Binding Time}">
+                                    </Label>
+                                    
                                 </Grid>
                                 <BoxView HorizontalOptions="FillAndExpand" HeightRequest="0.5" BackgroundColor="{x:StaticResource NikoSoftGreyColor}" />
                                 <StackLayout.Triggers>

@@ -113,6 +113,11 @@
             <Setter Property="TextColor" Value="{x:StaticResource NikoBlackColor}" />
         </Style>
 
+        <Style x:Key="NikoBoldBlackLabel14" TargetType="{x:Type Label}" BasedOn="{x:StaticResource NikoBoldLabel}">
+            <Setter Property="FontSize" Value="14" />
+            <Setter Property="TextColor" Value="{x:StaticResource NikoBlackColor}" />
+        </Style>
+
         <Style x:Key="NikoBlackLabel14" TargetType="{x:Type Label}" BasedOn="{x:StaticResource NikoLabel}">
             <Setter Property="TextColor" Value="{x:StaticResource NikoBlackColor}" />
             <Setter Property="FontSize" Value="14" />
