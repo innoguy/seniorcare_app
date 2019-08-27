@@ -129,12 +129,12 @@
                             <Label Text="{x:Static resources:AppLocalization.Term_From}" 
                                    Style="{x:StaticResource ConfigLabel}" 
                                    TextColor="{x:StaticResource NikoGreyColor}"/>
-                            <TimePicker Time="{Binding PersonNotInBedFrom}" Format="HH"></TimePicker>
+                            <TimePicker Time="{Binding PersonNotInBedFrom}"></TimePicker>
                         </StackLayout>
                         <StackLayout Grid.Row="1" Grid.Column="1"  Style="{x:StaticResource Layout24}">
                             <Label Text="{x:Static resources:AppLocalization.Term_To}" 
                                    Style="{x:StaticResource ConfigLabel}" TextColor="{x:StaticResource NikoGreyColor}" />
-                            <TimePicker Time="{Binding PersonNotInBedTo}" Format="HH"></TimePicker>
+                            <TimePicker Time="{Binding PersonNotInBedTo}"></TimePicker>
                         </StackLayout>
                     </Grid>
                 </StackLayout>

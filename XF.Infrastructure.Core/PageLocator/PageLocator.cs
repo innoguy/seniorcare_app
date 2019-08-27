@@ -7,7 +7,6 @@ namespace XF.Infrastructure.Core
 {
     public class PageLocator : IPageLocator
     {
-
         public virtual AnimationPage CreatePage(Type pageType)
         {
             try
@@ -20,7 +19,6 @@ namespace XF.Infrastructure.Core
                 throw;
             }
         }
-
 
         public virtual IViewModel CreateViewModel(Type viewModelType)
         {
@@ -74,14 +72,12 @@ namespace XF.Infrastructure.Core
             return modelType;
         }
 
-
         public AnimationPage ResolvePageAndViewModel(Type viewModelType, object args)
         {
             var viewModel = this.CreateViewModel(viewModelType);
             viewModel.Init(args);
             return this.ResolvePage(viewModel);
         }
-
         
         public AnimationPage ResolvePage(IViewModel viewModel)
         {
