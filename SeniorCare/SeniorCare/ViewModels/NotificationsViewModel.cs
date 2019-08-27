@@ -97,7 +97,7 @@ namespace SeniorCare.ViewModels
             DateTime dtDateTime = new DateTime(1970, 1, 1, 0, 0, 0, 0, DateTimeKind.Utc);
             double time = unixTimeStamp;
             dtDateTime = dtDateTime.AddMilliseconds(time).ToLocalTime();
-            string dateTime = dtDateTime.ToString("hh:mm:ss dd:mm:yyy");
+            string dateTime = dtDateTime.ToString("hh:mm:ss dd/MM/yyy");
             return dateTime;
         }
 

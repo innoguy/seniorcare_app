@@ -1,4 +1,5 @@
-﻿using System.Net.Http;
+﻿using System;
+using System.Net.Http;
 using System.Text;
 using Newtonsoft.Json.Linq;
 
@@ -12,12 +13,15 @@ namespace ServiceModule.Thresholds
         public async void UpdateThresholds(string deviceId, Models.Thresholds thresholds)
         {
             var json = SetThresholds(thresholds);
-
-            var response = await _client.PostAsJsonAsync($"{_baseURL}/config/patterns/upload/{deviceId}", json);
-            response.EnsureSuccessStatusCode();
-            if (response.IsSuccessStatusCode)
+            try
             {
+                var response = await _client.PostAsJsonAsync($"{_baseURL}/config/patterns/upload/{deviceId}", json);
+                response.EnsureSuccessStatusCode();
             }
+            catch (Exception e)
+            {
+                Console.WriteLine(e.Message);
+            }     
         }
 
         private JObject SetThresholds(Models.Thresholds thresholds)

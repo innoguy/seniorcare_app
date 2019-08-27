@@ -1,4 +1,5 @@
-﻿using System.Collections.Generic;
+﻿using System;
+using System.Collections.Generic;
 using System.Diagnostics;
 using System.Net.Http;
 using System.Threading.Tasks;
@@ -14,18 +15,24 @@ namespace ServiceModule.Notifications
 
         public async Task<IEnumerable<NotificationEntity>> GetNotifications(string deviceId, string startTime, string endTime)
         {
-            Debug.WriteLine($"StartTime: {startTime} | EndTime:  {endTime}");
             var notificationsList = new List<NotificationEntity>();
-            var response = await _client.GetAsync($"{_baseURL}/notification/query/{deviceId}/{startTime}/{endTime}");
-            if (response.IsSuccessStatusCode)
+            try
             {
-                var resp = await response.Content.ReadAsStringAsync();
-                notificationsList = JsonConvert.DeserializeObject<List<NotificationEntity>>(resp);
+                var response = await _client.GetAsync($"{_baseURL}/notification/query/{deviceId}/{startTime}/{endTime}");
+                if (response.IsSuccessStatusCode)
+                {
+                    var resp = await response.Content.ReadAsStringAsync();
+                    notificationsList = JsonConvert.DeserializeObject<List<NotificationEntity>>(resp);
+                }
+
+                return notificationsList;
             }
-            return notificationsList;
+            catch (Exception e)
+            {
+                Console.WriteLine(e);
+                return notificationsList;
+            }
+            
         }
-
-
-
     }
 }
