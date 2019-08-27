@@ -17,7 +17,12 @@ namespace SeniorCare.BaseClasses
         protected readonly object syncRoot = new object();
 
         private string _title;
-        public bool IsInitializing { get; set; }
+        private bool _isInitializing;
+        public bool IsInitializing
+        {
+            get => _isInitializing;
+            set => SetProperty(ref _isInitializing, value);
+        }
 
         public string Title
         {

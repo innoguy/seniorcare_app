@@ -34,9 +34,16 @@ namespace XF.Infrastructure.Core.Controls
         #endregion
 
         #region IViewModel
-        private string _title;
-        public bool IsInitializing { get; set; }
 
+        private bool _isInitializing;
+        public bool IsInitializing
+        {
+            get => _isInitializing;
+            set => SetProperty(ref _isInitializing, value);
+        }
+
+        private string _title;
+        
         public string Title
         {
             get { return _title; }
