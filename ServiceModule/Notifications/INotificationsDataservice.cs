@@ -6,6 +6,6 @@ namespace ServiceModule.Notifications
 {
     public interface INotificationsDataservice
     {
-        Task<IEnumerable<NotificationEntity>> GetNotifications(string deviceId, string startTime, string endTime);
+        Task<IEnumerable<NotificationEntity>> GetNotifications(string deviceId, long startTime);
     }
 }

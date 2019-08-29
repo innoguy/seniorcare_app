@@ -17,7 +17,7 @@ namespace SeniorCare.ViewModels
 {
     public class NotificationsViewModel : ViewModelBase
     {
-        private static string _startTime = "0";
+        private static long _startTime = 0;
 
         private INotificationsDataservice _notificationsDataservice;
         public INotificationsDataservice NotificationsDataservice =>
@@ -67,11 +67,13 @@ namespace SeniorCare.ViewModels
 
         private async Task GetNotifications()
         {
-            var endTime = ((Int64) DateTime.UtcNow.Subtract(new DateTime(1970, 1, 1)).TotalMilliseconds).ToString();
+            //var endTime = ((Int64) DateTime.UtcNow.Subtract(new DateTime(1970, 1, 1)).TotalMilliseconds);
 
-            var notificationEntities = await NotificationsDataservice.GetNotifications("device_id_1", _startTime, endTime);
-            _startTime = endTime;
+            var notificationEntities = await NotificationsDataservice.GetNotifications("device_id_1", _startTime);
             if (!notificationEntities.Any()) return;
+
+            _startTime = notificationEntities.Last().Time;
+            
 
             await UpdateNotifications(notificationEntities);
         }

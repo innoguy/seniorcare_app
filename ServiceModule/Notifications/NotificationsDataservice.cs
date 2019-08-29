@@ -13,12 +13,12 @@ namespace ServiceModule.Notifications
         static readonly HttpClient _client = new HttpClient();
         private static string _baseURL = "http://5.2.158.223:45678/apiv1";
 
-        public async Task<IEnumerable<NotificationEntity>> GetNotifications(string deviceId, string startTime, string endTime)
+        public async Task<IEnumerable<NotificationEntity>> GetNotifications(string deviceId, long startTime)
         {
             var notificationsList = new List<NotificationEntity>();
             try
             {
-                var response = await _client.GetAsync($"{_baseURL}/notification/query/{deviceId}/{startTime}/{endTime}");
+                var response = await _client.GetAsync($"{_baseURL}/notification/query/{deviceId}/{startTime}");
                 if (response.IsSuccessStatusCode)
                 {
                     var resp = await response.Content.ReadAsStringAsync();
