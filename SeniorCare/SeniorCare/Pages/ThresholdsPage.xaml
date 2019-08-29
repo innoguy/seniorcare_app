@@ -121,7 +121,7 @@
                         </Grid.ColumnDefinitions>
 
                         <StackLayout Grid.Row="0" Grid.Column="0" Grid.ColumnSpan="2" Style="{x:StaticResource Layout24}" Margin="0,0,0,6">
-                            <Label Text="Person not in bed" 
+                            <Label Text="Person in bed" 
                                    Style="{x:StaticResource ConfigLabel}" 
                                    TextColor="{x:StaticResource NikoBlackColor}" />
                         </StackLayout>
@@ -135,6 +135,46 @@
                             <Label Text="{x:Static resources:AppLocalization.Term_To}" 
                                    Style="{x:StaticResource ConfigLabel}" TextColor="{x:StaticResource NikoGreyColor}" />
                             <TimePicker Time="{Binding PersonNotInBedTo}"></TimePicker>
+                        </StackLayout>
+                    </Grid>
+
+                    <BoxView HorizontalOptions="FillAndExpand" HeightRequest="0.5" BackgroundColor="{x:StaticResource NikoSoftGreyColor}" />
+
+                    <Grid Margin="0,16,0,16">
+                        <Grid.RowDefinitions>
+                            <RowDefinition Height="Auto" />
+                            <RowDefinition Height="Auto" />
+                        </Grid.RowDefinitions>
+
+                        <StackLayout Grid.Row="0" Style="{x:StaticResource Layout24}" Margin="0,0,0,6">
+                            <Label Text="Low temperature" 
+                                   Style="{x:StaticResource ConfigLabel}" 
+                                   TextColor="{x:StaticResource NikoBlackColor}" />
+                        </StackLayout>
+                        <StackLayout Grid.Row="1" Style="{x:StaticResource Layout24}">
+                            <Label Text="Alerts will be issued if temperature drop bellow 20° C" 
+                                   Style="{x:StaticResource ConfigLabel}" 
+                                   TextColor="{x:StaticResource NikoGreyColor}"/>
+                        </StackLayout>
+                    </Grid>
+
+                    <BoxView HorizontalOptions="FillAndExpand" HeightRequest="0.5" BackgroundColor="{x:StaticResource NikoSoftGreyColor}" />
+
+                    <Grid Margin="0,16,0,16">
+                        <Grid.RowDefinitions>
+                            <RowDefinition Height="Auto" />
+                            <RowDefinition Height="Auto" />
+                        </Grid.RowDefinitions>
+
+                        <StackLayout Grid.Row="0" Style="{x:StaticResource Layout24}" Margin="0,0,0,6">
+                            <Label Text="SOS Alerts" 
+                                   Style="{x:StaticResource ConfigLabel}" 
+                                   TextColor="{x:StaticResource NikoBlackColor}" />
+                        </StackLayout>
+                        <StackLayout Grid.Row="1" Style="{x:StaticResource Layout24}">
+                            <Label Text="An alert will be issued if a switch was pressed at least 4 times in less than 10 seconds"
+                                   Style="{x:StaticResource ConfigLabel}" 
+                                   TextColor="{x:StaticResource NikoGreyColor}"/>
                         </StackLayout>
                     </Grid>
                 </StackLayout>
