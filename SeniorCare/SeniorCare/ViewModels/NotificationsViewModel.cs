@@ -73,7 +73,7 @@ namespace SeniorCare.ViewModels
             if (!notificationEntities.Any()) return;
 
             _startTime = notificationEntities.Last().Time;
-            
+
 
             await UpdateNotifications(notificationEntities);
         }
@@ -96,13 +96,12 @@ namespace SeniorCare.ViewModels
 
         public string UnixTimeStampToDateTime(long unixTimeStamp)
         {
-            DateTime dtDateTime = new DateTime(1970, 1, 1, 0, 0, 0, 0, DateTimeKind.Utc);
+            DateTime dtDateTime = new DateTime(1970, 1, 1, 0, 0, 0, 0, DateTimeKind.Local);
             double time = unixTimeStamp;
             dtDateTime = dtDateTime.AddMilliseconds(time).ToLocalTime();
-            string dateTime = dtDateTime.ToString("hh:mm:ss dd/MM/yyy");
+            string dateTime = dtDateTime.ToString("HH:mm:ss dd/MM/yyy");
             return dateTime;
         }
-
 
         private async Task BackgroundAsync()
         {
