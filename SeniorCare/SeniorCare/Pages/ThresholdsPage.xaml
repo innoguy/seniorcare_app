@@ -49,12 +49,12 @@
                             <RowDefinition Height="Auto" />
                         </Grid.RowDefinitions>
                         <Grid.ColumnDefinitions>
-                            <ColumnDefinition Width="3*" />
-                            <ColumnDefinition Width="7*" />
+                            <ColumnDefinition Width="4*" />
+                            <ColumnDefinition Width="6*" />
                         </Grid.ColumnDefinitions>
 
                         <StackLayout Grid.Row="0" Grid.Column="0" Grid.ColumnSpan="2" Style="{x:StaticResource Layout24}" Margin="0,0,0,6">
-                            <Label Text="High power device on for more than " 
+                            <Label Text="High power device on for less than " 
                                    Style="{x:StaticResource ConfigLabel}" 
                                    TextColor="{x:StaticResource NikoBlackColor}" />
                         </StackLayout>
@@ -83,7 +83,7 @@
                         </Grid.ColumnDefinitions>
 
                         <StackLayout Grid.Row="0" Grid.Column="0" Grid.ColumnSpan="3" Style="{x:StaticResource Layout24}" Margin="0,0,0,6">
-                            <Label Text="Person going to the bathroom more than" 
+                            <Label Text="Going to bathroom less than" 
                                    Style="{x:StaticResource ConfigLabel}" 
                                    TextColor="{x:StaticResource NikoBlackColor}" />
                         </StackLayout>
@@ -152,7 +152,7 @@
                                    TextColor="{x:StaticResource NikoBlackColor}" />
                         </StackLayout>
                         <StackLayout Grid.Row="1" Style="{x:StaticResource Layout24}">
-                            <Label Text="Alerts will be issued if temperature drop bellow 20° C" 
+                            <Label Text="Alerts will be issued if temperature is 17°C or bellow" 
                                    Style="{x:StaticResource ConfigLabel}" 
                                    TextColor="{x:StaticResource NikoGreyColor}"/>
                         </StackLayout>
@@ -172,7 +172,7 @@
                                    TextColor="{x:StaticResource NikoBlackColor}" />
                         </StackLayout>
                         <StackLayout Grid.Row="1" Style="{x:StaticResource Layout24}">
-                            <Label Text="An alert will be issued if a switch was pressed at least 4 times in less than 10 seconds"
+                            <Label Text="An alert will be issued if a switch was pressed at least 5 times in 15 seconds or less"
                                    Style="{x:StaticResource ConfigLabel}" 
                                    TextColor="{x:StaticResource NikoGreyColor}"/>
                         </StackLayout>

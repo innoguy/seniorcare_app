@@ -19,16 +19,16 @@ namespace ServiceModule.Thresholds.Models
         public Thresholds()
         {
             TelevisionFromTime = TimeSpan.Parse("23:00:00");
-            TelevisionToTime = TimeSpan.Parse("07:00:00");
+            TelevisionToTime = TimeSpan.Parse("06:00:00");
 
-            PowerDeviceTime = 3600;
+            PowerDeviceTime = 200;
 
             BathroomGoingTimes = 2;
-            BathroomFromTime = TimeSpan.Parse("23:00:00");
-            BathroomToTime = TimeSpan.Parse("23:00:00");
+            BathroomFromTime = TimeSpan.Parse("00:00:00");
+            BathroomToTime = TimeSpan.Parse("06:00:00");
 
-            PersonNotInBedFrom = TimeSpan.Parse("23:00:00");
-            PersonNotInBedTo = TimeSpan.Parse("07:00:00");
+            PersonNotInBedFrom = TimeSpan.Parse("00:00:00");
+            PersonNotInBedTo = TimeSpan.Parse("06:00:00");
         }
     }
 }

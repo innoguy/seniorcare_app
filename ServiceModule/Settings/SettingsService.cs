@@ -14,25 +14,25 @@ namespace ServiceModule.Settings
 
         public string TelevisionFromTime
         {
-            get => _settings.GetValueOrDefault(nameof(TelevisionFromTime), "00:00:00");
+            get => _settings.GetValueOrDefault(nameof(TelevisionFromTime), "23:00:00");
             set => _settings.AddOrUpdateValue(nameof(TelevisionFromTime), value);
         }
 
         public string TelevisionToTime
         {
-            get => _settings.GetValueOrDefault(nameof(TelevisionToTime), "00:00:00");
+            get => _settings.GetValueOrDefault(nameof(TelevisionToTime), "06:00:00");
             set => _settings.AddOrUpdateValue(nameof(TelevisionToTime), value);
         }
 
         public int PowerDeviceTime
         {
-            get => _settings.GetValueOrDefault(nameof(PowerDeviceTime), 0);
+            get => _settings.GetValueOrDefault(nameof(PowerDeviceTime), 200);
             set => _settings.AddOrUpdateValue(nameof(PowerDeviceTime), value);
         }
 
         public int BathroomGoingTimes
         {
-            get => _settings.GetValueOrDefault(nameof(BathroomGoingTimes), 0);
+            get => _settings.GetValueOrDefault(nameof(BathroomGoingTimes), 2);
             set => _settings.AddOrUpdateValue(nameof(BathroomGoingTimes), value);
         }
 
@@ -44,7 +44,7 @@ namespace ServiceModule.Settings
 
         public string BathroomToTime
         {
-            get => _settings.GetValueOrDefault(nameof(BathroomToTime), "00:00:00");
+            get => _settings.GetValueOrDefault(nameof(BathroomToTime), "06:00:00");
             set => _settings.AddOrUpdateValue(nameof(BathroomToTime), value);
         }
 
@@ -56,7 +56,7 @@ namespace ServiceModule.Settings
 
         public string PersonNotInBedTo
         {
-            get => _settings.GetValueOrDefault(nameof(PersonNotInBedTo), "00:00:00");
+            get => _settings.GetValueOrDefault(nameof(PersonNotInBedTo), "06:00:00");
             set => _settings.AddOrUpdateValue(nameof(PersonNotInBedTo), value);
         }
     }

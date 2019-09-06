@@ -34,7 +34,7 @@ namespace ServiceModule.Thresholds
                                 'id': 1,
                                 'sensors':
                                 {
-                                    'P001':
+                                    'P012':
                                     {
                                         'value':
                                         {
@@ -49,7 +49,7 @@ namespace ServiceModule.Thresholds
                                        'start': '" + thresholds.TelevisionFromTime + @"',
                                        'end': '" + thresholds.TelevisionToTime + @"'
                                     },
-                                    'frequency': 300
+                                    'frequency': 600
                                 },
                                 'messages':
                                 {
@@ -61,15 +61,15 @@ namespace ServiceModule.Thresholds
                                 'id': 2,
                                 'sensors':
                                 {
-                                    'P002':
+                                    'P018':
                                         {
                                             'value':
                                             {
-                                                'more': 10
+                                                'more': 400
                                             },
                                             'duration':
                                             {
-                                                'more' : " + thresholds.PowerDeviceTime + @"
+                                                'more' : " + (thresholds.PowerDeviceTime * 60) + @"
                                             },
                                             'frequency':
                                             {
@@ -79,7 +79,7 @@ namespace ServiceModule.Thresholds
                                 },
                                 'time':
                                 {
-                                    'frequency': 300
+                                    'frequency': 600
                                 },
                                 'messages':
                                 {
@@ -91,16 +91,16 @@ namespace ServiceModule.Thresholds
                                 'id': 3,
                                 'sensors':
                                 {
-                                    'M001':
+                                    'M004':
                                     {
                                         'value':
                                         {
                                             'equal': 'On'
                                          },
-                                        'cluster_separation': 200,
+                                        'cluster_separation': 300,
                                         'duration':
                                             {
-                                                'more' : 300
+                                                'more' : 60
                                             },
                                         'frequency':
                                         {
@@ -126,7 +126,7 @@ namespace ServiceModule.Thresholds
                                 'id': 4,
                                 'sensors':
                                 {
-                                    'M001':
+                                    'M003':
                                     {
                                         'value':
                                         {
@@ -161,14 +161,14 @@ namespace ServiceModule.Thresholds
                                     {
                                         'value':
                                         {
-                                            'more': 20,
-                                            'less':32
+                                            'more': 17,
+                                            'less':30
                                         }
                                     }
                                 },
                                 'time':
                                 {
-                                    'frequency': 300
+                                    'frequency': 3600
                                 },
                                 'messages':
                                 {
@@ -180,7 +180,7 @@ namespace ServiceModule.Thresholds
                                 'id': 6,
                                 'sensors':
                                 {
-                                    'B001':
+                                    'D004':
                                     {
                                         'value':
                                         {
@@ -188,13 +188,13 @@ namespace ServiceModule.Thresholds
                                         },
                                         'frequency':
                                         {
-                                            'less': 4
+                                            'less': 5
                                         }
                                     }
                                 },
                                 'notified':
                                 {
-                                    'duration' : 10
+                                    'duration' : 15
                                 },
                                 'messages':
                                 {
