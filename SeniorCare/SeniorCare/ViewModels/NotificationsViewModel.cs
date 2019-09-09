@@ -73,7 +73,7 @@ namespace SeniorCare.ViewModels
             if (!notificationEntities.Any()) return;
 
             _startTime = notificationEntities.Last().Time;
-
+            var test = UnixTimeStampToLocalDateTime(_startTime);
 
             await UpdateNotifications(notificationEntities);
         }
@@ -88,15 +88,15 @@ namespace SeniorCare.ViewModels
                     Notifications.Insert(0, new NotificationViewModel(
                         notificationEntity.Ruleid,
                         notificationEntity.Controllerid,
-                        UnixTimeStampToDateTime(notificationEntity.Time),
+                        UnixTimeStampToLocalDateTime(notificationEntity.Time),
                         notificationEntity.Message));
                 }
             });
         }
 
-        public string UnixTimeStampToDateTime(long unixTimeStamp)
+        public string UnixTimeStampToLocalDateTime(long unixTimeStamp)
         {
-            DateTime dtDateTime = new DateTime(1970, 1, 1, 0, 0, 0, 0, DateTimeKind.Local);
+            DateTime dtDateTime = new DateTime(1970, 1, 1, 0, 0, 0, 0, DateTimeKind.Utc);
             double time = unixTimeStamp;
             dtDateTime = dtDateTime.AddMilliseconds(time).ToLocalTime();
             string dateTime = dtDateTime.ToString("HH:mm:ss dd/MM/yyy");
