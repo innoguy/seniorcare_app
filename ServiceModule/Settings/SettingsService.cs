@@ -12,6 +12,24 @@ namespace ServiceModule.Settings
             _settings = CrossSettings.Current;
         }
 
+        public string Protocol
+        {
+            get => _settings.GetValueOrDefault(nameof(Protocol), "http");
+            set => _settings.AddOrUpdateValue(nameof(Protocol), value);
+        }
+
+        public string IpAddress
+        {
+            get => _settings.GetValueOrDefault(nameof(IpAddress), "5.2.158.223");
+            set => _settings.AddOrUpdateValue(nameof(IpAddress), value);
+        }
+
+        public string Port
+        {
+            get => _settings.GetValueOrDefault(nameof(Port), "45678");
+            set => _settings.AddOrUpdateValue(nameof(Port), value);
+        }
+
         public string TelevisionFromTime
         {
             get => _settings.GetValueOrDefault(nameof(TelevisionFromTime), "23:00:00");

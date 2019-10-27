@@ -2,19 +2,27 @@
 using System.Net.Http;
 using System.Text;
 using Newtonsoft.Json.Linq;
+using ServiceModule.Settings;
 
 namespace ServiceModule.Thresholds
 {
     public class ThresholdsDataservice : IThresholdsDataservice
     {
+        private readonly ISettingsService _settingsService;
         static readonly HttpClient _client = new HttpClient();
-        private static string _baseURL = "http://5.2.158.223:45678/apiv1";
+        private static string _baseURL;
+
+        public ThresholdsDataservice(ISettingsService settingsService)
+        {
+            _settingsService = settingsService ?? throw new ArgumentNullException(nameof(settingsService));
+        }
 
         public async void UpdateThresholds(string deviceId, Models.Thresholds thresholds)
         {
             var json = SetThresholds(thresholds);
             try
             {
+                _baseURL = $"{_settingsService.Protocol}://{_settingsService.IpAddress}:{_settingsService.Port}/apiv1";
                 var response = await _client.PostAsJsonAsync($"{_baseURL}/config/patterns/upload/{deviceId}", json);
                 response.EnsureSuccessStatusCode();
             }

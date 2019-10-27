@@ -5,7 +5,7 @@
              xmlns:pages="clr-namespace:SeniorCare.Pages;assembly=SeniorCare"
              xmlns:controls="clr-namespace:XF.Infrastructure.Core.Controls;assembly=XF.Infrastructure.Core"
              xmlns:views="clr-namespace:SeniorCare.Views;assembly=SeniorCare"
-
+             xmlns:resources="clr-namespace:SeniorCare.Resources;assembly=SeniorCare"
              x:Class="SeniorCare.Pages.HomePage">
     <ContentPage.Content>
         <Grid>
@@ -13,7 +13,10 @@
                 <RowDefinition Height="Auto" />
                 <RowDefinition Height="*" />
             </Grid.RowDefinitions>
-            <views:HeaderView Grid.Row="0" Title="{Binding Title, Converter={StaticResource UpperCaseConverter}}" BottomBorder="True" />
+            <views:HeaderView Grid.Row="0" 
+                              RightMenuIcon="{x:Static resources:ImageResources.GlobeInternet}"
+                              RightMenuItemCommand="{Binding OpenIpConfigCommand}"
+                              Title="{Binding Title, Converter={StaticResource UpperCaseConverter}}" BottomBorder="True" />
             <controls:TabsControl  Grid.Row="1" BackgroundColor="{x:StaticResource NikoWhiteColor}"
                                    CanChnageTabOnSwipe="True"
                                    ItemsSource="{Binding TabItems}"

@@ -21,6 +21,7 @@ namespace SeniorCare.Droid
             base.OnCreate(savedInstanceState);
             Bootstrap.Init();
             AndroidStatusBarProvider.Init(this);
+            Rg.Plugins.Popup.Popup.Init(this, savedInstanceState);
             Plugin.CurrentActivity.CrossCurrentActivity.Current.Init(this, savedInstanceState);
             UserDialogs.Init(this);
             global::Xamarin.Forms.Forms.Init(this, savedInstanceState);

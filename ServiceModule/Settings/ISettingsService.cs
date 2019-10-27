@@ -2,6 +2,9 @@
 {
     public interface ISettingsService
     {
+        string Protocol { get; set; }
+        string IpAddress { get; set; }
+        string Port { get; set; }
         string TelevisionFromTime { get; set; }
         string TelevisionToTime { get; set; }
         int PowerDeviceTime { get; set; }

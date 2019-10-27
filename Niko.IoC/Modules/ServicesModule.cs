@@ -9,9 +9,10 @@ namespace Niko.IoC.Modules
     {
         protected override void Load(ContainerBuilder builder)
         {
-            builder.Register(c => new NotificationsDataservice()).As<INotificationsDataservice>().AutoActivate().SingleInstance();
-            builder.Register(c => new ThresholdsDataservice()).As<IThresholdsDataservice>().AutoActivate().SingleInstance();
             builder.Register(c => new SettingsService()).As<ISettingsService>().AutoActivate().SingleInstance();
+            builder.Register(c => new NotificationsDataservice(c.Resolve<ISettingsService>())).As<INotificationsDataservice>().AutoActivate().SingleInstance();
+            builder.Register(c => new ThresholdsDataservice(c.Resolve<ISettingsService>())).As<IThresholdsDataservice>().AutoActivate().SingleInstance();
+            
         }
     }
 }

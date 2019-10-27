@@ -1,0 +1,51 @@
+﻿<?xml version="1.0" encoding="utf-8" ?>
+<pages:PopupPage xmlns="http://xamarin.com/schemas/2014/forms"
+             xmlns:x="http://schemas.microsoft.com/winfx/2009/xaml"
+             xmlns:pages="clr-namespace:Rg.Plugins.Popup.Pages;assembly=Rg.Plugins.Popup"
+             xmlns:animations="clr-namespace:Rg.Plugins.Popup.Animations;assembly=Rg.Plugins.Popup"
+             x:Class="SeniorCare.Popups.IpSetupPopup">
+    <pages:PopupPage.Resources>
+        <ResourceDictionary>
+            <Style x:Key="PopupLayout" TargetType="{x:Type StackLayout}">
+                <Setter Property="VerticalOptions" Value="Center"/>
+                <Setter Property="HorizontalOptions" Value="Center"/>
+                <Setter Property="Orientation" Value="Vertical"/>
+                <Setter Property="BackgroundColor" Value="White"/>
+                <Setter Property="Padding" Value="40"/>
+                <Setter Property="Margin" Value="40,0,40,0"/>
+            </Style>
+            <Style x:Key="EntryStyle" TargetType="{x:Type Entry}">
+                <Setter Property="TextColor" Value="Black"/>
+                <Setter Property="PlaceholderColor" Value="DarkGray"/>
+                <Setter Property="WidthRequest" Value="200"/>
+            </Style>
+        </ResourceDictionary>
+    </pages:PopupPage.Resources>
+    <pages:PopupPage.Animation>
+        <animations:ScaleAnimation 
+            PositionIn="Center"
+            PositionOut="Center"
+            ScaleIn="1.2"
+            ScaleOut="0.8"
+            DurationIn="400"
+            DurationOut="300"
+            EasingIn="SinOut"
+            EasingOut="SinIn"
+            HasBackgroundAnimation="False"/>
+    </pages:PopupPage.Animation>
+    <StackLayout Style="{StaticResource PopupLayout}">
+        <StackLayout Orientation="Vertical">
+            <Label Text="IP Address:"></Label>
+            <Picker x:Name="ProtocolSelection" Title="Protocol"></Picker>
+        </StackLayout>
+        <StackLayout Orientation="Vertical">
+            <Label Text="IP Address:"></Label>
+            <Entry x:Name="IpAddressEntry" Style="{StaticResource EntryStyle}"></Entry>
+        </StackLayout>
+        <StackLayout Orientation="Vertical">
+            <Label Text="Port:"></Label>
+            <Entry x:Name="PortEntry" Style="{StaticResource EntryStyle}"></Entry>
+        </StackLayout>
+        <Button Style="{x:StaticResource LargeButton}" Text="Save" Clicked="SaveButton_OnClicked" />
+    </StackLayout>
+</pages:PopupPage>

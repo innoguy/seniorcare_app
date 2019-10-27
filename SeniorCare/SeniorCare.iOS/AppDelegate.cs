@@ -27,6 +27,7 @@ namespace SeniorCare.iOS
                 statusBar.BackgroundColor = statusBarColor.ToUIColor();
                 statusBar.TintColor = UIColor.White;
             }
+            Rg.Plugins.Popup.Popup.Init();
             app.StatusBarStyle = UIStatusBarStyle.LightContent;
             FormsControls.Touch.Main.Init();
 
