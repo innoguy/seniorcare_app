@@ -59,7 +59,7 @@
                                    TextColor="{x:StaticResource NikoBlackColor}" />
                         </StackLayout>
                         <StackLayout Grid.Row="1" Grid.Column="0" Style="{x:StaticResource Layout24}">
-                            <controls:ExtEntry Text="{Binding PowerDeviceTime}"></controls:ExtEntry>
+                            <controls:ExtEntry Text="{Binding PowerDeviceTime}" Focused="OnEntryFocus"></controls:ExtEntry>
                         </StackLayout>
                         <Label Grid.Row="1" Grid.Column="1" Text="minutes" 
                                    Style="{x:StaticResource ConfigLabel}"
@@ -88,7 +88,7 @@
                                    TextColor="{x:StaticResource NikoBlackColor}" />
                         </StackLayout>
                         <StackLayout Grid.Row="1" Grid.Column="0" Style="{x:StaticResource HorizontalLayout24}">
-                            <controls:ExtEntry Text="{Binding BathroomGoingTimes}"></controls:ExtEntry>
+                            <controls:ExtEntry Text="{Binding BathroomGoingTimes}" Focused="OnEntryFocus"></controls:ExtEntry>
                         </StackLayout>
                         <Label Text="times during the night" Grid.Row="1" Grid.Column="1" Grid.ColumnSpan="2" 
                                Style="{x:StaticResource ConfigLabel}"

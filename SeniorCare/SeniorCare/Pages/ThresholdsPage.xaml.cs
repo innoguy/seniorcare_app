@@ -1,5 +1,6 @@
 ﻿using Xamarin.Forms;
 using Xamarin.Forms.Xaml;
+using XF.Infrastructure.Core.Controls;
 
 namespace SeniorCare.Pages
 {
@@ -15,6 +16,11 @@ namespace SeniorCare.Pages
         {
             ((TimePicker)sender).Unfocus();
 
+        }
+
+        private void OnEntryFocus(object sender, FocusEventArgs e)
+        {
+            ((ExtEntry)sender).Unfocus();
         }
     }
 }
