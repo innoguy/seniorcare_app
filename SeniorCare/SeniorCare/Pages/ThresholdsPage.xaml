@@ -32,12 +32,12 @@
                             <Label Text="{x:Static resources:AppLocalization.Term_From}" 
                                    Style="{x:StaticResource ConfigLabel}" 
                                    TextColor="{x:StaticResource NikoGreyColor}" />
-                            <TimePicker Time="{Binding TelevisionFromTime, Mode=TwoWay}"></TimePicker>
+                            <TimePicker Time="{Binding TelevisionFromTime, Mode=TwoWay}" Focused="OnTimePickerFocus" ></TimePicker>
                         </StackLayout>
                         <StackLayout Grid.Row="1" Grid.Column="1"  Style="{x:StaticResource Layout24}">
                             <Label Text="{x:Static resources:AppLocalization.Term_To}" 
                                    Style="{x:StaticResource ConfigLabel}" TextColor="{x:StaticResource NikoGreyColor}" />
-                            <TimePicker Time="{Binding TelevisionToTime}"></TimePicker>
+                            <TimePicker Time="{Binding TelevisionToTime}" Focused="OnTimePickerFocus"></TimePicker>
                         </StackLayout>
                     </Grid>
 
@@ -98,13 +98,13 @@
                             <Label Text="{x:Static resources:AppLocalization.Term_From}" 
                                    Style="{x:StaticResource ConfigLabel}" 
                                    TextColor="{x:StaticResource NikoGreyColor}" />
-                            <TimePicker Time="{Binding BathroomFromTime}"></TimePicker>
+                            <TimePicker Time="{Binding BathroomFromTime}" Focused="OnTimePickerFocus"></TimePicker>
                         </StackLayout>
                         <StackLayout Grid.Row="2" Grid.Column="2" Style="{x:StaticResource Layout24}" Margin="0,6,0,0">
                             <Label Text="{x:Static resources:AppLocalization.Term_To}" 
                                    Style="{x:StaticResource ConfigLabel}" 
                                    TextColor="{x:StaticResource NikoGreyColor}"/>
-                            <TimePicker Time="{Binding BathroomToTime}"></TimePicker>
+                            <TimePicker Time="{Binding BathroomToTime}" Focused="OnTimePickerFocus"></TimePicker>
                         </StackLayout>
                     </Grid>
 
@@ -129,12 +129,12 @@
                             <Label Text="{x:Static resources:AppLocalization.Term_From}" 
                                    Style="{x:StaticResource ConfigLabel}" 
                                    TextColor="{x:StaticResource NikoGreyColor}"/>
-                            <TimePicker Time="{Binding PersonNotInBedFrom}"></TimePicker>
+                            <TimePicker Time="{Binding PersonNotInBedFrom}" Focused="OnTimePickerFocus"></TimePicker>
                         </StackLayout>
                         <StackLayout Grid.Row="1" Grid.Column="1"  Style="{x:StaticResource Layout24}">
                             <Label Text="{x:Static resources:AppLocalization.Term_To}" 
                                    Style="{x:StaticResource ConfigLabel}" TextColor="{x:StaticResource NikoGreyColor}" />
-                            <TimePicker Time="{Binding PersonNotInBedTo}"></TimePicker>
+                            <TimePicker Time="{Binding PersonNotInBedTo}" Focused="OnTimePickerFocus"></TimePicker>
                         </StackLayout>
                     </Grid>
 

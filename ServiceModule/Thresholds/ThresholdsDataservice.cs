@@ -1,7 +1,13 @@
 ﻿using System;
+using System.Collections.Generic;
 using System.Net.Http;
+using System.Security.Cryptography;
 using System.Text;
+using System.Threading.Tasks;
+using Newtonsoft.Json;
 using Newtonsoft.Json.Linq;
+using ServiceModule.Common.Models;
+using ServiceModule.HashGenerator;
 using ServiceModule.Settings;
 
 namespace ServiceModule.Thresholds
@@ -17,6 +23,32 @@ namespace ServiceModule.Thresholds
             _settingsService = settingsService ?? throw new ArgumentNullException(nameof(settingsService));
         }
 
+        public async Task<IEnumerable<Pattern>> GetThresholds(string deviceId, Models.Thresholds thresholds)
+        {
+            List<Pattern> patterns = new List<Pattern>();
+
+            try
+            {
+                var md5Hash = MD5HashGenerator.GenerateKey(thresholds);
+
+                _baseURL = $"{_settingsService.Protocol}://{_settingsService.IpAddress}:{_settingsService.Port}/apiv1";
+                var response = await _client.GetAsync($"{_baseURL}/config/patterns/download/{deviceId}/{md5Hash}");
+                response.EnsureSuccessStatusCode();
+                if (response.IsSuccessStatusCode)
+                {
+                    var resp = await response.Content.ReadAsStringAsync();
+                    patterns = JsonConvert.DeserializeObject<List<Pattern>>(resp);
+                }
+
+                return patterns;
+            }
+            catch (Exception e)
+            {
+                Console.WriteLine(e.Message);
+                return patterns;
+            }
+        }
+
         public async void UpdateThresholds(string deviceId, Models.Thresholds thresholds)
         {
             var json = SetThresholds(thresholds);
@@ -29,7 +61,7 @@ namespace ServiceModule.Thresholds
             catch (Exception e)
             {
                 Console.WriteLine(e.Message);
-            }     
+            }
         }
 
         private JObject SetThresholds(Models.Thresholds thresholds)

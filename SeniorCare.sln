@@ -1,7 +1,7 @@
 ﻿
 Microsoft Visual Studio Solution File, Format Version 12.00
-# Visual Studio 15
-VisualStudioVersion = 15.0.28307.779
+# Visual Studio Version 16
+VisualStudioVersion = 16.0.29418.71
 MinimumVisualStudioVersion = 10.0.40219.1
 Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "SeniorCare.Android", "SeniorCare\SeniorCare.Android\SeniorCare.Android.csproj", "{87AB2AA8-87CF-4E0D-A807-1B1F6B03440F}"
 EndProject
@@ -23,7 +23,7 @@ Project("{2150E333-8FDC-42A3-9474-1A3956D46DE8}") = "Ioc", "Ioc", "{69563B56-772
 EndProject
 Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "Niko.IoC", "Niko.IoC\Niko.IoC.csproj", "{D86DF88F-5CA2-441A-8608-D25DE6F833DB}"
 EndProject
-Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "ServiceModule", "ServiceModule\ServiceModule.csproj", "{952A2DF1-FF59-4283-B706-D8F5B896E196}"
+Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "ServiceModule", "ServiceModule\ServiceModule.csproj", "{952A2DF1-FF59-4283-B706-D8F5B896E196}"
 EndProject
 Global
 	GlobalSection(SolutionConfigurationPlatforms) = preSolution

@@ -59,97 +59,97 @@ namespace SeniorCare.ViewModels
         public TimeSpan TelevisionFromTime
         {
             get => _televisionFromTime;
-            set
-            {
-                SetProperty(ref _televisionFromTime, value);
-                _thresholds.TelevisionFromTime = value;
-                SettingsService.TelevisionFromTime = value.ToString();
-                UpdateThresholds();
-            }
+//            set
+//            {
+//                SetProperty(ref _televisionFromTime, value);
+//                _thresholds.TelevisionFromTime = value;
+//                SettingsService.TelevisionFromTime = value.ToString();
+//                UpdateThresholds();
+//            }
         }
 
         public TimeSpan TelevisionToTime
         {
             get => _televisionToTime;
-            set
-            {
-                SetProperty(ref _televisionToTime, value);
-                _thresholds.TelevisionToTime = value;
-                SettingsService.TelevisionToTime = value.ToString();
-                UpdateThresholds();
-            }
+//            set
+//            {
+//                SetProperty(ref _televisionToTime, value);
+//                _thresholds.TelevisionToTime = value;
+//                SettingsService.TelevisionToTime = value.ToString();
+//                UpdateThresholds();
+//            }
         }
 
         public int PowerDeviceTime
         {
             get => _powerDeviceTime;
-            set
-            {
-                SetProperty(ref _powerDeviceTime, value);
-                _thresholds.PowerDeviceTime = value;
-                SettingsService.PowerDeviceTime = value;
-                UpdateThresholds();
-            }
+//            set
+//            {
+//                SetProperty(ref _powerDeviceTime, value);
+//                _thresholds.PowerDeviceTime = value;
+//                SettingsService.PowerDeviceTime = value;
+//                UpdateThresholds();
+//            }
         }
 
         public int BathroomGoingTimes
         {
             get => _bathroomGoingTimes;
-            set
-            {
-                SetProperty(ref _bathroomGoingTimes, value);
-                _thresholds.BathroomGoingTimes = value;
-                SettingsService.BathroomGoingTimes = value;
-                UpdateThresholds();
-            }
+//            set
+//            {
+//                SetProperty(ref _bathroomGoingTimes, value);
+//                _thresholds.BathroomGoingTimes = value;
+//                SettingsService.BathroomGoingTimes = value;
+//                UpdateThresholds();
+//            }
         }
 
         public TimeSpan BathroomFromTime
         {
             get => _bathroomFromTime;
-            set
-            {
-                SetProperty(ref _bathroomFromTime, value);
-                _thresholds.BathroomFromTime = value;
-                SettingsService.BathroomFromTime = value.ToString();
-                UpdateThresholds();
-            }
+//            set
+//            {
+//                SetProperty(ref _bathroomFromTime, value);
+//                _thresholds.BathroomFromTime = value;
+//                SettingsService.BathroomFromTime = value.ToString();
+//                UpdateThresholds();
+//            }
         }
 
         public TimeSpan BathroomToTime
         {
             get => _bathroomToTime;
-            set
-            {
-                SetProperty(ref _bathroomToTime, value);
-                _thresholds.BathroomToTime = value;
-                SettingsService.BathroomToTime = value.ToString();
-                UpdateThresholds();
-            }
+//            set
+//            {
+//                SetProperty(ref _bathroomToTime, value);
+//                _thresholds.BathroomToTime = value;
+//                SettingsService.BathroomToTime = value.ToString();
+//                UpdateThresholds();
+//            }
         }
 
         public TimeSpan PersonNotInBedFrom
         {
             get => _personNotInBedFrom;
-            set
-            {
-                SetProperty(ref _personNotInBedFrom, value);
-                _thresholds.PersonNotInBedFrom = value;
-                SettingsService.PersonNotInBedFrom = value.ToString();
-                UpdateThresholds();
-            }
+//            set
+//            {
+//                SetProperty(ref _personNotInBedFrom, value);
+//                _thresholds.PersonNotInBedFrom = value;
+//                SettingsService.PersonNotInBedFrom = value.ToString();
+//                UpdateThresholds();
+//            }
         }
 
         public TimeSpan PersonNotInBedTo
         {
             get => _personNotInBetTo;
-            set
-            {
-                SetProperty(ref _personNotInBetTo, value);
-                _thresholds.PersonNotInBedTo = value;
-                SettingsService.PersonNotInBedTo = value.ToString();
-                UpdateThresholds();
-            }
+//            set
+//            {
+//                SetProperty(ref _personNotInBetTo, value);
+//                _thresholds.PersonNotInBedTo = value;
+//                SettingsService.PersonNotInBedTo = value.ToString();
+//                UpdateThresholds();
+//            }
         }
 
         private void UpdateThresholds()

@@ -1,4 +1,5 @@
-﻿using Xamarin.Forms.Xaml;
+﻿using Xamarin.Forms;
+using Xamarin.Forms.Xaml;
 
 namespace SeniorCare.Pages
 {
@@ -9,5 +10,11 @@ namespace SeniorCare.Pages
 		{
 			InitializeComponent ();
 		}
-	}
+
+        private void OnTimePickerFocus(object sender, FocusEventArgs e)
+        {
+            ((TimePicker)sender).Unfocus();
+
+        }
+    }
 }
