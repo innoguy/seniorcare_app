@@ -1,8 +1,6 @@
-﻿using System;
-using System.Collections.Generic;
-using System.Text;
+﻿using System.Collections.Generic;
 
-namespace ServiceModule.Common.Models
+namespace ServiceModule.Thresholds.DataAccess.Entities
 {
     public class Pattern
     {

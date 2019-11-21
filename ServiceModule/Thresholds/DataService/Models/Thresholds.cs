@@ -1,6 +1,6 @@
 ﻿using System;
 
-namespace ServiceModule.Thresholds.Models
+namespace ServiceModule.Thresholds.DataService.Models
 {
     public class Thresholds
     {

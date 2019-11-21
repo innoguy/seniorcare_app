@@ -1,29 +1,28 @@
 ﻿using System;
 using System.Collections.Generic;
 using System.Net.Http;
-using System.Security.Cryptography;
 using System.Text;
 using System.Threading.Tasks;
 using Newtonsoft.Json;
 using Newtonsoft.Json.Linq;
-using ServiceModule.Common.Models;
 using ServiceModule.HashGenerator;
 using ServiceModule.Settings;
+using ServiceModule.Thresholds.DataAccess.Entities;
 
-namespace ServiceModule.Thresholds
+namespace ServiceModule.Thresholds.DataAccess
 {
-    public class ThresholdsDataservice : IThresholdsDataservice
+    public class ThresholdsDAL : IThresholdsDAL
     {
         private readonly ISettingsService _settingsService;
         static readonly HttpClient _client = new HttpClient();
         private static string _baseURL;
 
-        public ThresholdsDataservice(ISettingsService settingsService)
+        public ThresholdsDAL(ISettingsService settingsService)
         {
             _settingsService = settingsService ?? throw new ArgumentNullException(nameof(settingsService));
         }
 
-        public async Task<IEnumerable<Pattern>> GetThresholds(string deviceId, Models.Thresholds thresholds)
+        public async Task<IEnumerable<Pattern>> GetThresholds(string deviceId, DataService.Models.Thresholds thresholds)
         {
             List<Pattern> patterns = new List<Pattern>();
 
@@ -49,7 +48,7 @@ namespace ServiceModule.Thresholds
             }
         }
 
-        public async void UpdateThresholds(string deviceId, Models.Thresholds thresholds)
+        public async void UpdateThresholds(string deviceId, DataService.Models.Thresholds thresholds)
         {
             var json = SetThresholds(thresholds);
             try
@@ -64,7 +63,7 @@ namespace ServiceModule.Thresholds
             }
         }
 
-        private JObject SetThresholds(Models.Thresholds thresholds)
+        private JObject SetThresholds(DataService.Models.Thresholds thresholds)
         {
             var sb = new StringBuilder();
             sb.Append(@"

@@ -9,4 +9,10 @@
     <PackageReference Include="Xam.Plugins.Settings" Version="4.1.0-beta" />
   </ItemGroup>
 
+  <ItemGroup>
+    <Folder Include="Common\Models\" />
+    <Folder Include="Thresholds\Factory\" />
+    <Folder Include="Thresholds\Models\" />
+  </ItemGroup>
+
 </Project>

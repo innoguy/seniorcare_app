@@ -1,8 +1,6 @@
 ﻿using System;
-using System.Collections.Generic;
-using System.Text;
 
-namespace ServiceModule.Common.Models
+namespace ServiceModule.Thresholds.DataAccess.Entities
 {
     public class Period
     {
