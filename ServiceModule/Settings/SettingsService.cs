@@ -77,5 +77,11 @@ namespace ServiceModule.Settings
             get => _settings.GetValueOrDefault(nameof(PersonNotInBedTo), "06:00:00");
             set => _settings.AddOrUpdateValue(nameof(PersonNotInBedTo), value);
         }
+
+        public double TimeStamp
+        {
+            get => _settings.GetValueOrDefault(nameof(TimeStamp), 0.0);
+            set => _settings.AddOrUpdateValue(nameof(TimeStamp), value);
+        }
     }
 }

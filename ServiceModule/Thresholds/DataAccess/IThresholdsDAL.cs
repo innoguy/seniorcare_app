@@ -5,8 +5,6 @@ namespace ServiceModule.Thresholds.DataAccess
 {
     public interface IThresholdsDAL
     {
-        void UpdateThresholds(string deviceId, DataService.Models.Thresholds thresholds);
-
-        Task<SeniorCareJsonObject> GetThresholds(string deviceId, string md5Hash);
+        Task<SeniorCareJsonObject> GetThresholds(string deviceId, double timeStamp);
     }
 }

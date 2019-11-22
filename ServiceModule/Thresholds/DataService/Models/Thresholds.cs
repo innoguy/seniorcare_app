@@ -16,6 +16,8 @@ namespace ServiceModule.Thresholds.DataService.Models
         public TimeSpan PersonNotInBedFrom { get; set; }
         public TimeSpan PersonNotInBedTo { get; set; }
 
+        public double TimeStamp { get; set; }
+
         public Thresholds()
         {
             TelevisionFromTime = TimeSpan.Parse("23:00:00");
@@ -29,6 +31,8 @@ namespace ServiceModule.Thresholds.DataService.Models
 
             PersonNotInBedFrom = TimeSpan.Parse("00:00:00");
             PersonNotInBedTo = TimeSpan.Parse("06:00:00");
+
+            TimeStamp = 0;
         }
     }
 }

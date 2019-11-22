@@ -13,5 +13,6 @@
         string BathroomToTime { get; set; }
         string PersonNotInBedFrom { get; set; }
         string PersonNotInBedTo { get; set; }
+        double TimeStamp { get; set; }
     }
 }

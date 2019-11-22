@@ -1,6 +1,5 @@
 ﻿using System;
 using System.Collections.Generic;
-using System.Diagnostics;
 using System.Net.Http;
 using System.Threading.Tasks;
 using Newtonsoft.Json;
@@ -19,6 +18,7 @@ namespace ServiceModule.Notifications
         {
             _settingsService = settingsService ?? throw new ArgumentNullException(nameof(settingsService));
         }
+
 
         public async Task<IEnumerable<NotificationEntity>> GetNotifications(string deviceId, long startTime)
         {

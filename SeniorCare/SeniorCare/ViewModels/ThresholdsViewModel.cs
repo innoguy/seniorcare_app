@@ -60,115 +60,70 @@ namespace SeniorCare.ViewModels
         public TimeSpan TelevisionFromTime
         {
             get => _televisionFromTime;
-//            set
-//            {
-//                SetProperty(ref _televisionFromTime, value);
-//                _thresholds.TelevisionFromTime = value;
-//                SettingsService.TelevisionFromTime = value.ToString();
-//                UpdateThresholds();
-//            }
+            set => SetProperty(ref _televisionFromTime, value);
         }
 
         public TimeSpan TelevisionToTime
         {
             get => _televisionToTime;
-//            set
-//            {
-//                SetProperty(ref _televisionToTime, value);
-//                _thresholds.TelevisionToTime = value;
-//                SettingsService.TelevisionToTime = value.ToString();
-//                UpdateThresholds();
-//            }
+            set => SetProperty(ref _televisionToTime, value);
         }
 
         public int PowerDeviceTime
         {
             get => _powerDeviceTime;
-//            set
-//            {
-//                SetProperty(ref _powerDeviceTime, value);
-//                _thresholds.PowerDeviceTime = value;
-//                SettingsService.PowerDeviceTime = value;
-//                UpdateThresholds();
-//            }
+            set => SetProperty(ref _powerDeviceTime, value);
         }
 
         public int BathroomGoingTimes
         {
             get => _bathroomGoingTimes;
-//            set
-//            {
-//                SetProperty(ref _bathroomGoingTimes, value);
-//                _thresholds.BathroomGoingTimes = value;
-//                SettingsService.BathroomGoingTimes = value;
-//                UpdateThresholds();
-//            }
+            set => SetProperty(ref _bathroomGoingTimes, value);
         }
 
         public TimeSpan BathroomFromTime
         {
             get => _bathroomFromTime;
-//            set
-//            {
-//                SetProperty(ref _bathroomFromTime, value);
-//                _thresholds.BathroomFromTime = value;
-//                SettingsService.BathroomFromTime = value.ToString();
-//                UpdateThresholds();
-//            }
+            set => SetProperty(ref _bathroomFromTime, value);
         }
 
         public TimeSpan BathroomToTime
         {
             get => _bathroomToTime;
-//            set
-//            {
-//                SetProperty(ref _bathroomToTime, value);
-//                _thresholds.BathroomToTime = value;
-//                SettingsService.BathroomToTime = value.ToString();
-//                UpdateThresholds();
-//            }
+            set => SetProperty(ref _bathroomToTime, value);
+
         }
 
         public TimeSpan PersonNotInBedFrom
         {
             get => _personNotInBedFrom;
-//            set
-//            {
-//                SetProperty(ref _personNotInBedFrom, value);
-//                _thresholds.PersonNotInBedFrom = value;
-//                SettingsService.PersonNotInBedFrom = value.ToString();
-//                UpdateThresholds();
-//            }
+            set => SetProperty(ref _personNotInBedFrom, value);
         }
 
         public TimeSpan PersonNotInBedTo
         {
             get => _personNotInBedTo;
-//            set
-//            {
-//                SetProperty(ref _personNotInBetTo, value);
-//                _thresholds.PersonNotInBedTo = value;
-//                SettingsService.PersonNotInBedTo = value.ToString();
-//                UpdateThresholds();
-//            }
+            set => SetProperty(ref _personNotInBedTo, value);
         }
 
-        private async Task UpdateThresholds()
+        private async Task UpdateData()
         {
             while (true)
             {
-                var thresholds = await ThresholdsDataservice.GetThresholds("device_id_1", _thresholds);
+                var thresholds = await ThresholdsDataservice.GetThresholds("device_id_1", _thresholds.TimeStamp);
                 if (thresholds != null)
                 {
-                    await UpdateData(thresholds);
+                    await UpdateThresholds(thresholds);
+                    UpdateCache(thresholds);
                 }
-                
+
                 await Task.Delay(1000);
             }
         }
 
-        private async Task UpdateData(Thresholds thresholds)
+        private async Task UpdateThresholds(Thresholds thresholds)
         {
+            _thresholds.TimeStamp = thresholds.TimeStamp;
             _thresholds.TelevisionFromTime = thresholds.TelevisionFromTime;
             _thresholds.TelevisionToTime = thresholds.TelevisionToTime;
             _thresholds.PowerDeviceTime = thresholds.PowerDeviceTime;
@@ -180,56 +135,33 @@ namespace SeniorCare.ViewModels
 
             await Device.InvokeOnMainThreadAsync(() =>
             {
-                _televisionFromTime = thresholds.TelevisionFromTime;
-                _televisionToTime = thresholds.TelevisionToTime;
-                _powerDeviceTime = thresholds.PowerDeviceTime / 60;
-                _bathroomGoingTimes = thresholds.BathroomGoingTimes;
-                _bathroomFromTime = thresholds.BathroomFromTime;
-                _bathroomToTime = thresholds.BathroomToTime;
-                _personNotInBedFrom = thresholds.PersonNotInBedFrom;
-                _personNotInBedTo = thresholds.PersonNotInBedTo;
+                TelevisionFromTime = thresholds.TelevisionFromTime;
+                TelevisionToTime = thresholds.TelevisionToTime;
+                PowerDeviceTime = thresholds.PowerDeviceTime / 60;
+                BathroomGoingTimes = thresholds.BathroomGoingTimes;
+                BathroomFromTime = thresholds.BathroomFromTime;
+                BathroomToTime = thresholds.BathroomToTime;
+                PersonNotInBedFrom = thresholds.PersonNotInBedFrom;
+                PersonNotInBedTo = thresholds.PersonNotInBedTo;
             });
+        }
+
+        private void UpdateCache(Thresholds thresholds)
+        {
+            SettingsService.TimeStamp = thresholds.TimeStamp;
+            SettingsService.TelevisionFromTime = thresholds.TelevisionFromTime.ToString();
+            SettingsService.TelevisionToTime = thresholds.TelevisionToTime.ToString();
+            SettingsService.PowerDeviceTime = thresholds.PowerDeviceTime;
+            SettingsService.BathroomGoingTimes = thresholds.BathroomGoingTimes;
+            SettingsService.BathroomFromTime = thresholds.BathroomFromTime.ToString();
+            SettingsService.BathroomToTime = thresholds.BathroomToTime.ToString();
+            SettingsService.PersonNotInBedFrom = thresholds.PersonNotInBedFrom.ToString();
+            SettingsService.PersonNotInBedTo = thresholds.PersonNotInBedTo.ToString();
         }
 
         public override void OnAppearing()
         {
-            //            ThreadPool.QueueUserWorkItem(async o => await BackgroundAsync());
-            ThreadPool.QueueUserWorkItem(async o => await UpdateThresholds());
+            ThreadPool.QueueUserWorkItem(async o => await UpdateData());
         }
-
-
-        //        private async Task BackgroundAsync()
-        //        {
-        //            while (IsInitializing)
-        //            {
-        //                IsBusy = true;
-        //
-        //                if (_televisionFromTime == TimeSpan.Parse(SettingsService.TelevisionFromTime)
-        //                    && _televisionToTime == TimeSpan.Parse(SettingsService.TelevisionToTime)
-        //                    && _powerDeviceTime == SettingsService.PowerDeviceTime
-        //                    && _bathroomGoingTimes == SettingsService.BathroomGoingTimes
-        //                    && _bathroomFromTime == TimeSpan.Parse(SettingsService.BathroomFromTime)
-        //                    && _bathroomToTime == TimeSpan.Parse(SettingsService.BathroomToTime)
-        //                    && _personNotInBedFrom == TimeSpan.Parse(SettingsService.PersonNotInBedFrom)
-        //                    && _personNotInBedTo == TimeSpan.Parse(SettingsService.PersonNotInBedTo))
-        //                {
-        //                    await Task.Delay(0);
-        //                    IsInitializing = false;
-        //                    IsBusy = false;
-        //                    break;
-        //                }
-        //            }
-        //        }
-
-
-
-        /*
-        private void UpdateThresholds()
-        {
-            if (!IsInitializing)
-                ThresholdsDataservice.UpdateThresholds("device_id_1", _thresholds);
-        }
-        */
-
     }
 }
