@@ -2,7 +2,7 @@
 
 namespace ServiceModule.Thresholds.DataAccess.Entities
 {
-    public class Value
+    public class Frequency
     {
         [JsonProperty("more")]
         public int More { get; set; }
@@ -10,7 +10,5 @@ namespace ServiceModule.Thresholds.DataAccess.Entities
         [JsonProperty("less")]
         public int Less { get; set; }
 
-        [JsonProperty("equal")]
-        public string Equal { get; set; }
     }
 }

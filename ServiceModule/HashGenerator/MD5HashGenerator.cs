@@ -6,12 +6,14 @@ using System.Runtime.Serialization;
 using System.Runtime.Serialization.Formatters.Binary;
 using System.Security.Cryptography;
 using System.Text;
+using Newtonsoft.Json;
+using Newtonsoft.Json.Bson;
 
 namespace ServiceModule.HashGenerator
 {
     public class MD5HashGenerator
     {
-        private static readonly object locker = new object();
+        private static readonly object _locker = new object();
 
         /// <summary>
         /// Generates a hashed - key for an instance of a class.
@@ -24,21 +26,17 @@ namespace ServiceModule.HashGenerator
         /// <b>The method is thread-safe!</b>
         /// </summary>
         /// <param name="sourceObject">The object you'd like to have a key out of it.</param>
+        /// <param name="isJsonObject">If the object is a JsonObject set this to true, otherwise it will not serialize the object</param>
         /// <returns>An string representing a MD5 Hashkey corresponding to the object or null if the object couldn't be serialized.</returns>
         /// <exception cref="ApplicationException">Will be thrown if the key cannot be generated.</exception>
-        public static string GenerateKey(object sourceObject)
+        public static string GenerateKey(object sourceObject, bool isJsonObject = false)
         {
-            //Catch unuseful parameter values
             if (sourceObject == null)
-            {
                 throw new ArgumentNullException("Null as parameter is not allowed");
-            }
 
-            //We determine if the passed object is really serializable.
             try
             {
-                //Now we begin to do the real work.
-                var hashString = ComputeHash(ObjectToByteArray(sourceObject));
+                var hashString = ComputeHash(isJsonObject ? JsonObjectToByteArray(sourceObject) : ObjectToByteArray(sourceObject));
                 return hashString;
             }
             catch (AmbiguousMatchException ame)
@@ -59,9 +57,8 @@ namespace ServiceModule.HashGenerator
             BinaryFormatter formatter = new BinaryFormatter();
             try
             {
-                //Here's the core functionality! One Line!
                 //To be thread-safe we lock the object
-                lock (locker)
+                lock (_locker)
                 {
                     formatter.Serialize(fs, objectToSerialize);
                 }
@@ -76,6 +73,35 @@ namespace ServiceModule.HashGenerator
             {
                 fs.Close();
             }
+        }
+
+        private static byte[] JsonObjectToByteArray(object jsonObject)
+        {
+            MemoryStream ms = new MemoryStream();
+            try
+            {
+                //To be thread-safe we lock the object
+                lock (_locker)
+                {
+                    using (BsonDataWriter writer = new BsonDataWriter(ms))
+                    {
+                        JsonSerializer serializer = new JsonSerializer();
+                        serializer.Serialize(writer, jsonObject);
+                    }
+                }
+            }
+            catch (SerializationException se)
+            {
+                Console.WriteLine("Error occured during serialization. Message: " + se.Message);
+                return null;
+            }
+            finally
+            {
+                ms.Close();
+            }
+
+            var bsonByteArray = ms.ToArray();
+            return bsonByteArray;
         }
 
         /// <summary>
@@ -99,12 +125,10 @@ namespace ServiceModule.HashGenerator
                     sb.Append(result[i].ToString("X2"));
                 }
 
-                // And return it
                 return sb.ToString();
             }
             catch (ArgumentNullException)
             {
-                //If something occured during serialization, this method is called with an null argument. 
                 Console.WriteLine("Hash has not been generated.");
                 return null;
             }

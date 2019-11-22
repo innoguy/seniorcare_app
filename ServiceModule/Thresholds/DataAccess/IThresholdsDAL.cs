@@ -1,5 +1,4 @@
-﻿using System.Collections.Generic;
-using System.Threading.Tasks;
+﻿using System.Threading.Tasks;
 using ServiceModule.Thresholds.DataAccess.Entities;
 
 namespace ServiceModule.Thresholds.DataAccess
@@ -8,6 +7,6 @@ namespace ServiceModule.Thresholds.DataAccess
     {
         void UpdateThresholds(string deviceId, DataService.Models.Thresholds thresholds);
 
-        Task<IEnumerable<Pattern>> GetThresholds(string deviceId, DataService.Models.Thresholds thresholds);
+        Task<SeniorCareJsonObject> GetThresholds(string deviceId, string md5Hash);
     }
 }

@@ -1,12 +1,13 @@
 ﻿using System;
 using System.Collections.Generic;
+using System.Net;
 using System.Net.Http;
 using System.Text;
 using System.Threading.Tasks;
 using Newtonsoft.Json;
 using Newtonsoft.Json.Linq;
-using ServiceModule.HashGenerator;
 using ServiceModule.Settings;
+using ServiceModule.StorageService;
 using ServiceModule.Thresholds.DataAccess.Entities;
 
 namespace ServiceModule.Thresholds.DataAccess
@@ -14,37 +15,43 @@ namespace ServiceModule.Thresholds.DataAccess
     public class ThresholdsDAL : IThresholdsDAL
     {
         private readonly ISettingsService _settingsService;
+        private readonly ICrossStorageService _crossStorageService;
+
         static readonly HttpClient _client = new HttpClient();
         private static string _baseURL;
 
-        public ThresholdsDAL(ISettingsService settingsService)
+        public ThresholdsDAL(ISettingsService settingsService, ICrossStorageService crossStorageService)
         {
             _settingsService = settingsService ?? throw new ArgumentNullException(nameof(settingsService));
+            _crossStorageService = crossStorageService ?? throw new ArgumentNullException(nameof(crossStorageService));
         }
 
-        public async Task<IEnumerable<Pattern>> GetThresholds(string deviceId, DataService.Models.Thresholds thresholds)
+        public async Task<SeniorCareJsonObject> GetThresholds(string deviceId, string md5Hash)
         {
-            List<Pattern> patterns = new List<Pattern>();
+            var seniorCareJsonObject = new SeniorCareJsonObject();
 
             try
             {
-                var md5Hash = MD5HashGenerator.GenerateKey(thresholds);
-
                 _baseURL = $"{_settingsService.Protocol}://{_settingsService.IpAddress}:{_settingsService.Port}/apiv1";
                 var response = await _client.GetAsync($"{_baseURL}/config/patterns/download/{deviceId}/{md5Hash}");
                 response.EnsureSuccessStatusCode();
+                if (response.StatusCode == HttpStatusCode.NotModified)
+                {
+                    return null;
+                }
                 if (response.IsSuccessStatusCode)
                 {
                     var resp = await response.Content.ReadAsStringAsync();
-                    patterns = JsonConvert.DeserializeObject<List<Pattern>>(resp);
+                    await _crossStorageService.WriteTextAsync("jsonFile", resp);
+                    seniorCareJsonObject = JsonConvert.DeserializeObject<SeniorCareJsonObject>(resp);
                 }
 
-                return patterns;
+                return seniorCareJsonObject;
             }
             catch (Exception e)
             {
                 Console.WriteLine(e.Message);
-                return patterns;
+                return seniorCareJsonObject;
             }
         }
 
@@ -67,7 +74,10 @@ namespace ServiceModule.Thresholds.DataAccess
         {
             var sb = new StringBuilder();
             sb.Append(@"
-                    {'patterns':
+                    {
+                        'version': 1,
+                        'last-modified': 1564741796235,
+                        'patterns':
                         [
                             {
                                 'id': 1,

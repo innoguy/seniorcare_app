@@ -1,10 +1,14 @@
 ﻿using System;
+using Newtonsoft.Json;
 
 namespace ServiceModule.Thresholds.DataAccess.Entities
 {
     public class Period
     {
-        public DateTime Start { get; set; }
-        public DateTime End { get; set; }
+        [JsonProperty("start")]
+        public string Start { get; set; }
+
+        [JsonProperty("end")]
+        public string End { get; set; }
     }
 }

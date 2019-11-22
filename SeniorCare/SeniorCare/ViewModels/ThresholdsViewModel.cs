@@ -1,14 +1,10 @@
 ﻿using System;
-using System.Collections.Generic;
-using System.Linq;
 using System.Threading;
 using System.Threading.Tasks;
 using Niko.IoC;
 using SeniorCare.BaseClasses;
 using SeniorCare.Resources;
-using ServiceModule.Thresholds;
-using ServiceModule.Thresholds.DataAccess;
-using ServiceModule.Thresholds.DataAccess.Entities;
+using ServiceModule.Thresholds.DataService;
 using ServiceModule.Thresholds.DataService.Models;
 using Xamarin.Forms;
 
@@ -26,9 +22,9 @@ namespace SeniorCare.ViewModels
         private TimeSpan _personNotInBedFrom;
         private TimeSpan _personNotInBedTo;
 
-        private IThresholdsDAL _thresholdsDataservice;
-        public IThresholdsDAL ThresholdsDataservice =>
-            _thresholdsDataservice ?? (_thresholdsDataservice = AutofacIoC.Resolve<IThresholdsDAL>());
+        private IThresholdsDataService _thresholdsDataservice;
+        public IThresholdsDataService ThresholdsDataservice =>
+            _thresholdsDataservice ?? (_thresholdsDataservice = AutofacIoC.Resolve<IThresholdsDataService>());
 
         public ThresholdsViewModel()
         {
@@ -47,8 +43,6 @@ namespace SeniorCare.ViewModels
             };
 
             InitializeData();
-
-            ThreadPool.QueueUserWorkItem(async o => await UpdateThresholds());
         }
 
         private void InitializeData()
@@ -163,86 +157,71 @@ namespace SeniorCare.ViewModels
         {
             while (true)
             {
-                var thresholds = await GetThresholds();
-                await UpdateData(thresholds);
-
-
-
+                var thresholds = await ThresholdsDataservice.GetThresholds("device_id_1", _thresholds);
+                if (thresholds != null)
+                {
+                    await UpdateData(thresholds);
+                }
+                
                 await Task.Delay(1000);
             }
         }
 
-        private async Task<IEnumerable<Pattern>> GetThresholds()
+        private async Task UpdateData(Thresholds thresholds)
         {
-            var thresholds = await ThresholdsDataservice.GetThresholds("device_id_1", _thresholds);
-            if (thresholds.Count() == 0) return new List<Pattern>();
+            _thresholds.TelevisionFromTime = thresholds.TelevisionFromTime;
+            _thresholds.TelevisionToTime = thresholds.TelevisionToTime;
+            _thresholds.PowerDeviceTime = thresholds.PowerDeviceTime;
+            _thresholds.BathroomGoingTimes = thresholds.BathroomGoingTimes;
+            _thresholds.BathroomFromTime = thresholds.BathroomFromTime;
+            _thresholds.BathroomToTime = thresholds.BathroomToTime;
+            _thresholds.PersonNotInBedFrom = thresholds.PersonNotInBedFrom;
+            _thresholds.PersonNotInBedTo = thresholds.PersonNotInBedTo;
 
-            return thresholds;
-        }
-
-        private async Task UpdateData(IEnumerable<Pattern> patterns)
-        {
             await Device.InvokeOnMainThreadAsync(() =>
             {
-                foreach (var pattern in patterns)
-                {
-                    
-
-                    
-                }
+                _televisionFromTime = thresholds.TelevisionFromTime;
+                _televisionToTime = thresholds.TelevisionToTime;
+                _powerDeviceTime = thresholds.PowerDeviceTime / 60;
+                _bathroomGoingTimes = thresholds.BathroomGoingTimes;
+                _bathroomFromTime = thresholds.BathroomFromTime;
+                _bathroomToTime = thresholds.BathroomToTime;
+                _personNotInBedFrom = thresholds.PersonNotInBedFrom;
+                _personNotInBedTo = thresholds.PersonNotInBedTo;
             });
         }
 
-        private void UpdateUI()
-        {
-            _televisionFromTime = TimeSpan.Parse(SettingsService.TelevisionFromTime);
-            _televisionToTime = TimeSpan.Parse(SettingsService.TelevisionToTime);
-            _powerDeviceTime = SettingsService.PowerDeviceTime;
-            _bathroomGoingTimes = SettingsService.BathroomGoingTimes;
-            _bathroomFromTime = TimeSpan.Parse(SettingsService.BathroomFromTime);
-            _bathroomToTime = TimeSpan.Parse(SettingsService.BathroomToTime);
-            _personNotInBedFrom = TimeSpan.Parse(SettingsService.PersonNotInBedFrom);
-            _personNotInBedTo = TimeSpan.Parse(SettingsService.PersonNotInBedTo);
-        }
-
-        private void SetThresholds()
-        {
-
-        }
-
-        private void UpdateAppCache()
-        {
-
-        }
-
-
-        private async Task BackgroundAsync()
-        {
-            while (IsInitializing)
-            {
-                IsBusy = true;
-
-                if (_televisionFromTime == TimeSpan.Parse(SettingsService.TelevisionFromTime)
-                    && _televisionToTime == TimeSpan.Parse(SettingsService.TelevisionToTime)
-                    && _powerDeviceTime == SettingsService.PowerDeviceTime
-                    && _bathroomGoingTimes == SettingsService.BathroomGoingTimes
-                    && _bathroomFromTime == TimeSpan.Parse(SettingsService.BathroomFromTime)
-                    && _bathroomToTime == TimeSpan.Parse(SettingsService.BathroomToTime)
-                    && _personNotInBedFrom == TimeSpan.Parse(SettingsService.PersonNotInBedFrom)
-                    && _personNotInBedTo == TimeSpan.Parse(SettingsService.PersonNotInBedTo))
-                {
-                    await Task.Delay(0);
-                    IsInitializing = false;
-                    IsBusy = false;
-                    break;
-                }
-            }
-        }
-
         public override void OnAppearing()
-        { 
-            ThreadPool.QueueUserWorkItem(async o => await BackgroundAsync());
+        {
+            //            ThreadPool.QueueUserWorkItem(async o => await BackgroundAsync());
+            ThreadPool.QueueUserWorkItem(async o => await UpdateThresholds());
         }
+
+
+        //        private async Task BackgroundAsync()
+        //        {
+        //            while (IsInitializing)
+        //            {
+        //                IsBusy = true;
+        //
+        //                if (_televisionFromTime == TimeSpan.Parse(SettingsService.TelevisionFromTime)
+        //                    && _televisionToTime == TimeSpan.Parse(SettingsService.TelevisionToTime)
+        //                    && _powerDeviceTime == SettingsService.PowerDeviceTime
+        //                    && _bathroomGoingTimes == SettingsService.BathroomGoingTimes
+        //                    && _bathroomFromTime == TimeSpan.Parse(SettingsService.BathroomFromTime)
+        //                    && _bathroomToTime == TimeSpan.Parse(SettingsService.BathroomToTime)
+        //                    && _personNotInBedFrom == TimeSpan.Parse(SettingsService.PersonNotInBedFrom)
+        //                    && _personNotInBedTo == TimeSpan.Parse(SettingsService.PersonNotInBedTo))
+        //                {
+        //                    await Task.Delay(0);
+        //                    IsInitializing = false;
+        //                    IsBusy = false;
+        //                    break;
+        //                }
+        //            }
+        //        }
+
+
 
         /*
         private void UpdateThresholds()
