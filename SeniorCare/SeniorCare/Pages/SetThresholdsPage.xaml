@@ -1,0 +1,77 @@
+﻿<?xml version="1.0" encoding="utf-8" ?>
+<pages:PageBase xmlns="http://xamarin.com/schemas/2014/forms"
+             xmlns:x="http://schemas.microsoft.com/winfx/2009/xaml"
+             xmlns:d="http://xamarin.com/schemas/2014/forms/design"
+             xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006"
+             xmlns:pages="clr-namespace:SeniorCare.Pages;assembly=SeniorCare"
+             xmlns:resources="clr-namespace:SeniorCare.Resources;assembly=SeniorCare"
+             xmlns:controls="clr-namespace:XF.Infrastructure.Core.Controls;assembly=XF.Infrastructure.Core"
+             mc:Ignorable="d"
+             x:Class="SeniorCare.Pages.SetThresholdsPage">
+    <ContentPage.Content>
+        <Grid BackgroundColor="{x:StaticResource NikoWhiteColor}">
+            <Grid.RowDefinitions>
+                <RowDefinition Height="Auto" />
+                <RowDefinition Height="*" />
+            </Grid.RowDefinitions>
+            <ScrollView Grid.Row="1">
+                <StackLayout Style="{x:StaticResource Layout24}" HorizontalOptions="FillAndExpand" VerticalOptions="Start">
+                    <Grid Margin="0,16,0,16">
+                        <Grid.RowDefinitions>
+                            <RowDefinition Height="Auto" />
+                            <RowDefinition Height="Auto" />
+                        </Grid.RowDefinitions>
+                        <Grid.ColumnDefinitions>
+                            <ColumnDefinition Width="5*" />
+                            <ColumnDefinition Width="5*" />
+                        </Grid.ColumnDefinitions>
+
+                        <StackLayout Grid.Row="0" Grid.Column="0" Grid.ColumnSpan="2" Style="{x:StaticResource Layout24}" Margin="0,0,0,6">
+                            <Label Text="Television off"
+                                   Style="{x:StaticResource ConfigLabel}" 
+                                   TextColor="{x:StaticResource NikoBlackColor}" />
+                        </StackLayout>
+                        <StackLayout Grid.Row="1" Grid.Column="0"  Style="{x:StaticResource Layout24}">
+                            <Label Text="{x:Static resources:AppLocalization.Term_From}" 
+                                   Style="{x:StaticResource ConfigLabel}" 
+                                   TextColor="{x:StaticResource NikoGreyColor}" />
+                            <TimePicker Time="{Binding TelevisionFromTime, Mode=TwoWay}"></TimePicker>
+                        </StackLayout>
+                        <StackLayout Grid.Row="1" Grid.Column="1"  Style="{x:StaticResource Layout24}">
+                            <Label Text="{x:Static resources:AppLocalization.Term_To}" 
+                                   Style="{x:StaticResource ConfigLabel}" TextColor="{x:StaticResource NikoGreyColor}" />
+                            <TimePicker Time="{Binding TelevisionToTime}"></TimePicker>
+                        </StackLayout>
+                    </Grid>
+
+                    <BoxView HorizontalOptions="FillAndExpand" HeightRequest="0.5" BackgroundColor="{x:StaticResource NikoSoftGreyColor}" />
+
+                    <Grid Margin="0,16,0,16">
+                        <Grid.RowDefinitions>
+                            <RowDefinition Height="Auto" />
+                            <RowDefinition Height="Auto" />
+                        </Grid.RowDefinitions>
+                        <Grid.ColumnDefinitions>
+                            <ColumnDefinition Width="4*" />
+                            <ColumnDefinition Width="6*" />
+                        </Grid.ColumnDefinitions>
+
+                        <StackLayout Grid.Row="0" Grid.Column="0" Grid.ColumnSpan="2" Style="{x:StaticResource Layout24}" Margin="0,0,0,6">
+                            <Label Text="High power device on for less than " 
+                                   Style="{x:StaticResource ConfigLabel}" 
+                                   TextColor="{x:StaticResource NikoBlackColor}" />
+                        </StackLayout>
+                        <StackLayout Grid.Row="1" Grid.Column="0" Style="{x:StaticResource Layout24}">
+                            <controls:ExtEntry Text="{Binding PowerDeviceTime}"></controls:ExtEntry>
+                        </StackLayout>
+                        <Label Grid.Row="1" Grid.Column="1" Text="minutes" 
+                                   Style="{x:StaticResource ConfigLabel}"
+                                   HorizontalOptions="StartAndExpand" VerticalOptions="CenterAndExpand" 
+                                   TextColor="{x:StaticResource NikoBlackColor}"/>
+
+                    </Grid>
+                </StackLayout>
+            </ScrollView>
+        </Grid>
+    </ContentPage.Content>
+</pages:PageBase>
