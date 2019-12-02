@@ -23,7 +23,7 @@ namespace ServiceModule.Thresholds.DataService
                 var jsonObject = await _thresholdsDal.GetThresholds(deviceId, timeStamp);
                 if (jsonObject == null) return null;
 
-                var newThresholds =  CreateThresholds(jsonObject);
+                var newThresholds = CreateThresholds(jsonObject);
                 return newThresholds;
 
             }
@@ -46,15 +46,15 @@ namespace ServiceModule.Thresholds.DataService
                 TimeStamp = jsonObject.LastModified,
                 BathroomFromTime = TimeSpan.Parse(bathroomPattern.Time.Period.Start),
                 BathroomToTime = TimeSpan.Parse(bathroomPattern.Time.Period.End),
-                BathroomGoingTimes = bathroomPattern.Sensors.Find(s => s.Name == SensorsName.M001.ToString()).Frequency.Less,
+                BathroomGoingTimes = bathroomPattern.Sensors[0].Frequency.Less,
                 PersonNotInBedFrom = TimeSpan.Parse(personBedSchedulePattern.Time.Period.Start),
                 PersonNotInBedTo = TimeSpan.Parse(personBedSchedulePattern.Time.Period.End),
-                PowerDeviceTime = powerDevicePattern.Sensors.Find(s => s.Name == SensorsName.P002.ToString()).Duration.More,
+                PowerDeviceTime = powerDevicePattern.Sensors[0].Duration.More,
                 TelevisionFromTime = TimeSpan.Parse(televisionPattern.Time.Period.Start),
                 TelevisionToTime = TimeSpan.Parse(televisionPattern.Time.Period.End)
             };
-
             return updatedThresholds;
+
         }
     }
 }
